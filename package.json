@@ -1,0 +1,17 @@
+{
+  "name": "devpie-client-common-module",
+  "version": "1.0.0",
+  "description": "This module supplies the event types and event definitions for Devpie's CQRS System Architecture.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run output-go && npm run output-py",
+    "output-go": "quicktype events.ts -o events.go",
+    "output-py": "quicktype events.ts -o events.py"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "quicktype": "^15.0.258"
+  }
+}
