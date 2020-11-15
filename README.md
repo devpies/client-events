@@ -1,6 +1,6 @@
 # Common Module for Event-driven Architecture
 
-Common module for event-driven architecture. Designed for Command Query Responsibility Segregation (CQRS).
+Designed for Command Query Responsibility Segregation (CQRS) and event sourcing.
 
 The TypeScript code, under `src`, contains the source of truth. [Quicktype](https://quicktype.io/) is used to convert Typescript source code to specific language targets. Each supported language has its own package.
 
