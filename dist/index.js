@@ -1,36 +1,18 @@
 "use strict";
-// System commands and events
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Events = exports.Commands = void 0;
-// Commands are things to be done. (in the future)
-// Events are things that have happened. (in the past)
-var Commands;
-(function (Commands) {
-    Commands["RegisterUser"] = "RegisterUser";
-    Commands["ModifyUser"] = "ModifyUser";
-    // AddTask = 'AddTask',
-    // ModifyTask = 'ModifyTask',
-    // DestroyTask = 'DestroyTask',
-    // MoveTask = 'MoveTask',
-    // AddColumn = 'AddColumn',
-    // ModifyColumn = 'ModifyColumn',
-    // DestroyColumn = 'DestroyColumn',
-    // AddProject = 'AddProject',
-    // ModifyProject = 'ModifyProject',
-    // DestroyProject = 'DestroyProject',
-})(Commands = exports.Commands || (exports.Commands = {}));
-var Events;
-(function (Events) {
-    Events["UserRegistered"] = "UserRegistered";
-    Events["UserModified"] = "UserModified";
-    // TaskAdded = 'TaskAdded',
-    // TaskModified = 'TaskModified',
-    // TaskDestroyed = 'TaskDestroyed',
-    // TaskMoved = 'TaskMoved',
-    // ColumnAdded = 'ColumnAdded',
-    // ColumnModified= 'ColumnModified',
-    // ColumnDestroyed = 'ColumnDestroyed',
-    // ProjectAdded = 'ProjectAdded',
-    // ProjectModified= 'ProjectModified',
-    // ProjectDestroyed = 'ProjectDestroyed'
-})(Events = exports.Events || (exports.Events = {}));
+exports.Publisher = exports.Listener = void 0;
+__exportStar(require("./events"), exports);
+var base_listener_1 = require("./base-listener");
+Object.defineProperty(exports, "Listener", { enumerable: true, get: function () { return base_listener_1.Listener; } });
+var base_publisher_1 = require("./base-publisher");
+Object.defineProperty(exports, "Publisher", { enumerable: true, get: function () { return base_publisher_1.Publisher; } });
