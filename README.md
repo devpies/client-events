@@ -12,33 +12,33 @@ This package serves as a shared library for all message interfaces, commands and
 
 Devpie Client's event data model is exported as command and event enums, and message interfaces, to enable easy lookup of the available identifiers in the system.
 
-```
-import { Commands, Events } from "@devpie/client-events"
+```typescript
+import { Commands, Events } from "@devpie/client-events";
 
-console.log(Commands.RegisterUser)
+console.log(Commands.RegisterUser);
 // RegisterUser
 
-console.log(Events.UserRegistered)
+console.log(Events.UserRegistered);
 // UserRegistered
 ```
 
 Existing interfaces allow us to type check the message body being sent, ensuring correctness of implementation.
 
-```
+```typescript
 export interface UserRegisteredEvent {
+  id: string;
+  type: Events.UserRegistered;
+  metadata: Metadata;
+  data: {
     id: string;
-    type: Events.UserRegistered;
-    metadata: Metadata;
-    data: {
-        id: string;
-        auth0Id: string;
-        email: string;
-        emailVerified: boolean;
-        firstName: string;
-        lastName: string;
-        picture: string;
-        locale: string;
-    };
+    auth0Id: string;
+    email: string;
+    emailVerified: boolean;
+    firstName: string;
+    lastName: string;
+    picture: string;
+    locale: string;
+  };
 }
 ```
 
