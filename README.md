@@ -1,17 +1,21 @@
-# Common Module For Events
+# Common Module for Event-driven Architecture
 
-This module supplies the event types and event definitions for Devpie's CQRS System Architecture.
+Common module for event-driven architecture. Designed for Command Query Responsibility Segregation (CQRS).
 
-The same events are specified in multiple languages. Supported languages include:
+The TypeScript code, under `src`, contains the source of truth. [Quicktype](https://quicktype.io/) is used to convert Typescript source code to specific language targets. Each supported language has its own package.
+
+Supported languages include:
 
 - TypeScript
 - Golang
-- and Python
+- Python [See package](https://pypi.org/project/devpie-client-events/)
 
-The base definition is defined in Typescript under `events.ts` and converted into other languages using [Quicktype](https://quicktype.io/).
+## Development
 
-## Usage
+If you modify `src/index.ts`, you need to re-build to update the packages.
 
-To build code for both Python and Go run: `npm run build`
+```
+npm run build
+```
 
 ![cqrs architecture](cqrs.png)

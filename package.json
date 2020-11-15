@@ -1,17 +1,28 @@
 {
-  "name": "devpie-client-common-module",
-  "version": "1.0.0",
-  "description": "This module supplies the event types and event definitions for Devpie's CQRS System Architecture.",
-  "main": "index.js",
+  "name": "devpie-client-events",
+  "version": "0.0.1",
+  "description": "Common module for event-driven architecture.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npm run output-go && npm run output-py",
-    "output-go": "quicktype events.ts -o events.go",
-    "output-py": "quicktype events.ts -o events.py"
+    "build": "npm run build-ts && npm run build-go && npm run build-py",
+    "build-ts": "tsc",
+    "build-go": "quicktype src/index.ts -o go/events/events.go --package events --multi-file-output",
+    "build-py": "quicktype src/index.ts -o py/events/__init__.py --just-types --nice-property-names --python-version 3.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivorscott/devpie-client-common-module.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "quicktype": "^15.0.258"
+  "author": "ivorscott",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ivorscott/devpie-client-common-module/issues"
+  },
+  "homepage": "https://github.com/ivorscott/devpie-client-common-module#readme",
+  "devDependencies": {
+    "quicktype": "^15.0.258",
+    "typescript": "^4.0.5"
   }
 }
