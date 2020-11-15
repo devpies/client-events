@@ -1,6 +1,6 @@
 {
   "name": "@devpie/client-events",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Common module for event-driven architecture.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
