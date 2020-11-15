@@ -55,7 +55,7 @@ This package is written in TypeScript but converted to additional language targe
 Supported languages include:
 
 - TypeScript [See package](https://www.npmjs.com/package/@devpie/client-events)
-- Golang
+- Golang [See package](https://github.com/ivorscott/devpie-client-events/tree/main/go)
 - Python [See package](https://pypi.org/project/devpie-client-events/)
 
 ## Development
