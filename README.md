@@ -44,7 +44,7 @@ export interface UserRegisteredEvent {
 
 ## Messaging
 
-Messaging systems allow services to exchanging messages without coupling them together. Some services emit messages, while others listen to the messages they subscribe to.
+Messaging systems allow services to exchange messages without coupling them together. Some services emit messages, while others listen to the messages they subscribe to.
 
 A message is a generic term for data that could be either a command or an event. Commands are messages that trigger something to happen (in the future). Events are messages that notify listeners about something that has happened (in the past). Publishers send commands or events without knowing the consumers that may be listening.
 
