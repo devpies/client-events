@@ -97,10 +97,10 @@ func (r *UserModifiedEvent) Marshal() ([]byte, error) {
 }
 
 type AddUserCommand struct {
-	Data     AddUserCommandData `json:"data"`    
-	ID       string             `json:"id"`      
-	Metadata Metadata           `json:"metadata"`
-	Type     AddUserCommandType `json:"type"`    
+	Data     AddUserCommandData    `json:"data"`    
+	ID       string                `json:"id"`      
+	Metadata Metadata              `json:"metadata"`
+	Subject  AddUserCommandSubject `json:"subject"` 
 }
 
 type AddUserCommandData struct {
@@ -120,10 +120,10 @@ type Metadata struct {
 }
 
 type ModifyUserCommand struct {
-	Data     ModifyUserCommandData `json:"data"`    
-	ID       string                `json:"id"`      
-	Metadata Metadata              `json:"metadata"`
-	Type     ModifyUserCommandType `json:"type"`    
+	Data     ModifyUserCommandData    `json:"data"`    
+	ID       string                   `json:"id"`      
+	Metadata Metadata                 `json:"metadata"`
+	Subject  ModifyUserCommandSubject `json:"subject"` 
 }
 
 type ModifyUserCommandData struct {
@@ -134,10 +134,10 @@ type ModifyUserCommandData struct {
 }
 
 type UserAddedEvent struct {
-	Data     UserAddedEventData `json:"data"`    
-	ID       string             `json:"id"`      
-	Metadata Metadata           `json:"metadata"`
-	Type     UserAddedEventType `json:"type"`    
+	Data     UserAddedEventData    `json:"data"`    
+	ID       string                `json:"id"`      
+	Metadata Metadata              `json:"metadata"`
+	Subject  UserAddedEventSubject `json:"subject"` 
 }
 
 type UserAddedEventData struct {
@@ -152,10 +152,10 @@ type UserAddedEventData struct {
 }
 
 type UserModifiedEvent struct {
-	Data     UserModifiedEventData `json:"data"`    
-	ID       string                `json:"id"`      
-	Metadata Metadata              `json:"metadata"`
-	Type     UserModifiedEventType `json:"type"`    
+	Data     UserModifiedEventData    `json:"data"`    
+	ID       string                   `json:"id"`      
+	Metadata Metadata                 `json:"metadata"`
+	Subject  UserModifiedEventSubject `json:"subject"` 
 }
 
 type UserModifiedEventData struct {
@@ -171,14 +171,14 @@ const (
 	CommandsModifyUser Commands = "ModifyUser"
 )
 
-type AddUserCommandType string
+type AddUserCommandSubject string
 const (
-	TypeAddUser AddUserCommandType = "AddUser"
+	SubjectAddUser AddUserCommandSubject = "AddUser"
 )
 
-type ModifyUserCommandType string
+type ModifyUserCommandSubject string
 const (
-	TypeModifyUser ModifyUserCommandType = "ModifyUser"
+	SubjectModifyUser ModifyUserCommandSubject = "ModifyUser"
 )
 
 type Events string
@@ -187,12 +187,12 @@ const (
 	EventsUserModified Events = "UserModified"
 )
 
-type UserAddedEventType string
+type UserAddedEventSubject string
 const (
-	TypeUserAdded UserAddedEventType = "UserAdded"
+	SubjectUserAdded UserAddedEventSubject = "UserAdded"
 )
 
-type UserModifiedEventType string
+type UserModifiedEventSubject string
 const (
-	TypeUserModified UserModifiedEventType = "UserModified"
+	SubjectUserModified UserModifiedEventSubject = "UserModified"
 )

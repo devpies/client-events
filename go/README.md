@@ -22,10 +22,10 @@ import (
 )
 
 func main() {
-	command := events.TypeAddUser
+	command := events.SubjectAddUser
 	fmt.Println(command)
 
-	event := events.TypeUserAdded
+	event := events.SubjectUserAdded
 	fmt.Println(event)
 }
 ```

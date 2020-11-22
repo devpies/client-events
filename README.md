@@ -27,7 +27,7 @@ Existing interfaces allow us to type check the message body being sent, ensuring
 ```typescript
 export interface UserAddedEvent {
   id: string;
-  type: Events.UserAdded;
+  subject: Events.UserAdded;
   metadata: Metadata;
   data: {
     id: string;
@@ -58,7 +58,7 @@ Supported languages include:
 - Golang [See package](https://github.com/ivorscott/devpie-client-events/tree/main/go)
 - Python [See package](https://pypi.org/project/devpie-client-events/)
 
-## Development
+### Development
 
 Modify `src/index.ts`, the source of truth, then re-build to update all packages.
 
@@ -66,7 +66,7 @@ Modify `src/index.ts`, the source of truth, then re-build to update all packages
 npm run build
 ```
 
-# Release
+### Release
 
 Here's the steps to perform a manual release for Typescript, Python and Go packages (needs to be automated). Publishing Go modules relies on git tags. https://blog.golang.org/publishing-go-modules
 

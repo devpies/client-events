@@ -20,7 +20,7 @@ export enum Commands {
 
 export interface AddUserCommand {
   id: string;
-  type: Commands.AddUser;
+  subject: Commands.AddUser;
   metadata: Metadata;
   data: {
     id: string;
@@ -36,7 +36,7 @@ export interface AddUserCommand {
 
 export interface ModifyUserCommand {
   id: string;
-  type: Commands.ModifyUser;
+  subject: Commands.ModifyUser;
   metadata: Metadata;
   data: {
     firstName: string;
@@ -68,7 +68,7 @@ interface Metadata {
 
 export interface UserAddedEvent {
   id: string;
-  type: Events.UserAdded;
+  subject: Events.UserAdded;
   metadata: Metadata;
   data: {
     id: string;
@@ -84,7 +84,7 @@ export interface UserAddedEvent {
 
 export interface UserModifiedEvent {
   id: string;
-  type: Events.UserModified;
+  subject: Events.UserModified;
   metadata: Metadata;
   data: {
     firstName: string;
