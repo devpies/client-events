@@ -2,11 +2,11 @@ from enum import Enum
 
 
 class Commands(Enum):
+    ADD_USER = "AddUser"
     MODIFY_USER = "ModifyUser"
-    REGISTER_USER = "RegisterUser"
 
 
-class RegisterUserCommandData:
+class AddUserCommandData:
     auth0_id: str
     email: str
     email_verified: bool
@@ -36,17 +36,17 @@ class Metadata:
         self.user_id = user_id
 
 
-class RegisterUserCommandType(Enum):
-    REGISTER_USER = "RegisterUser"
+class AddUserCommandType(Enum):
+    ADD_USER = "AddUser"
 
 
-class RegisterUserCommand:
-    data: RegisterUserCommandData
+class AddUserCommand:
+    data: AddUserCommandData
     id: str
     metadata: Metadata
-    type: RegisterUserCommandType
+    type: AddUserCommandType
 
-    def __init__(self, data: RegisterUserCommandData, id: str, metadata: Metadata, type: RegisterUserCommandType) -> None:
+    def __init__(self, data: AddUserCommandData, id: str, metadata: Metadata, type: AddUserCommandType) -> None:
         self.data = data
         self.id = id
         self.metadata = metadata
@@ -84,11 +84,11 @@ class ModifyUserCommand:
 
 
 class Events(Enum):
+    USER_ADDED = "UserAdded"
     USER_MODIFIED = "UserModified"
-    USER_REGISTERED = "UserRegistered"
 
 
-class UserRegisteredEventData:
+class UserAddedEventData:
     auth0_id: str
     email: str
     email_verified: bool
@@ -109,17 +109,17 @@ class UserRegisteredEventData:
         self.picture = picture
 
 
-class UserRegisteredEventType(Enum):
-    USER_REGISTERED = "UserRegistered"
+class UserAddedEventType(Enum):
+    USER_ADDED = "UserAdded"
 
 
-class UserRegisteredEvent:
-    data: UserRegisteredEventData
+class UserAddedEvent:
+    data: UserAddedEventData
     id: str
     metadata: Metadata
-    type: UserRegisteredEventType
+    type: UserAddedEventType
 
-    def __init__(self, data: UserRegisteredEventData, id: str, metadata: Metadata, type: UserRegisteredEventType) -> None:
+    def __init__(self, data: UserAddedEventData, id: str, metadata: Metadata, type: UserAddedEventType) -> None:
         self.data = data
         self.id = id
         self.metadata = metadata

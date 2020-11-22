@@ -6,7 +6,7 @@ exports.Events = exports.Commands = void 0;
 // Events are things that have happened. (in the past)
 var Commands;
 (function (Commands) {
-    Commands["RegisterUser"] = "RegisterUser";
+    Commands["AddUser"] = "AddUser";
     Commands["ModifyUser"] = "ModifyUser";
     // AddTask = 'AddTask',
     // ModifyTask = 'ModifyTask',
@@ -21,7 +21,7 @@ var Commands;
 })(Commands = exports.Commands || (exports.Commands = {}));
 var Events;
 (function (Events) {
-    Events["UserRegistered"] = "UserRegistered";
+    Events["UserAdded"] = "UserAdded";
     Events["UserModified"] = "UserModified";
     // TaskAdded = 'TaskAdded',
     // TaskModified = 'TaskModified',

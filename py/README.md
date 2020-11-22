@@ -15,6 +15,6 @@ Example:
 ```
 import events
 
-print(events.Commands.REGISTER_USER.value)
-print(events.Events.USER_REGISTERED.value)
+print(events.Commands.ADD_USER.value)
+print(events.Events.USER_ADDED.value)
 ```

@@ -1,10 +1,10 @@
 export declare enum Commands {
-    RegisterUser = "RegisterUser",
+    AddUser = "AddUser",
     ModifyUser = "ModifyUser"
 }
-export interface RegisterUserCommand {
+export interface AddUserCommand {
     id: string;
-    type: Commands.RegisterUser;
+    type: Commands.AddUser;
     metadata: Metadata;
     data: {
         id: string;
@@ -29,16 +29,16 @@ export interface ModifyUserCommand {
     };
 }
 export declare enum Events {
-    UserRegistered = "UserRegistered",
+    UserAdded = "UserAdded",
     UserModified = "UserModified"
 }
 interface Metadata {
     traceId: string;
     userId: string;
 }
-export interface UserRegisteredEvent {
+export interface UserAddedEvent {
     id: string;
-    type: Events.UserRegistered;
+    type: Events.UserAdded;
     metadata: Metadata;
     data: {
         id: string;

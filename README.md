@@ -15,19 +15,19 @@ Devpie Client's event data model is exported as command and event enums, and mes
 ```typescript
 import { Commands, Events } from "@devpie/client-events";
 
-console.log(Commands.RegisterUser);
-// RegisterUser
+console.log(Commands.AddUser);
+// AddUser
 
-console.log(Events.UserRegistered);
-// UserRegistered
+console.log(Events.UserAdded);
+// UserAdded
 ```
 
 Existing interfaces allow us to type check the message body being sent, ensuring correctness of implementation.
 
 ```typescript
-export interface UserRegisteredEvent {
+export interface UserAddedEvent {
   id: string;
-  type: Events.UserRegistered;
+  type: Events.UserAdded;
   metadata: Metadata;
   data: {
     id: string;
@@ -64,4 +64,31 @@ Modify `src/index.ts`, the source of truth, then re-build to update all packages
 
 ```
 npm run build
+```
+
+# Release
+
+Here's the steps to perform a manual release for Typescript, Python and Go packages (needs to be automated). Publishing Go modules relies on git tags. https://blog.golang.org/publishing-go-modules
+
+```bash
+# 1. update ./py/setup.py version
+# 2. update ./package.json version
+# 3. commit changes to git
+
+#4. build and upload python package to PYPI
+cd py
+python3 setup.py sdist bdist_wheel
+python3 -m twine upload --skip-existing dist/*
+
+# 5. create a new tag for release
+git tag v0.0.1
+
+# 6. push new tag
+git push origin v0.0.1
+
+# 7. push changes to remote repository
+git push origin main
+
+# 8. publish npm module
+npm publish
 ```
