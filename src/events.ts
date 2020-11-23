@@ -1,7 +1,23 @@
-// System commands and events
+// System messages are either commands or events
 
 // Commands are things to be done. (in the future)
 // Events are things that have happened. (in the past)
+
+// All messages have an id, a subject, metadata and data
+
+export type Subjects = Events | Commands;
+
+export interface Message {
+  id: string;
+  subject: Subjects;
+  metadata: Metadata;
+  data: any;
+}
+
+export interface Metadata {
+  traceId: string;
+  userId: string;
+}
 
 export enum Commands {
   AddUser = "AddUser",
@@ -59,11 +75,6 @@ export enum Events {
   // ProjectAdded = 'ProjectAdded',
   // ProjectModified= 'ProjectModified',
   // ProjectDestroyed = 'ProjectDestroyed'
-}
-
-interface Metadata {
-  traceId: string;
-  userId: string;
 }
 
 export interface UserAddedEvent {

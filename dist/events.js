@@ -1,9 +1,7 @@
 "use strict";
-// System commands and events
+// System messages are either commands or events
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Events = exports.Commands = void 0;
-// Commands are things to be done. (in the future)
-// Events are things that have happened. (in the past)
 var Commands;
 (function (Commands) {
     Commands["AddUser"] = "AddUser";

@@ -1,14 +1,8 @@
-import { Stan } from 'node-nats-streaming';
-import { Events, Commands } from '.';
-declare type Subjects = Events | Commands;
-interface Event {
-    subject: Subjects;
-    data: any;
-}
-export declare abstract class Publisher<T extends Event> {
-    abstract subject: T['subject'];
+import { Stan } from "node-nats-streaming";
+import { Message } from ".";
+export declare abstract class Publisher<T extends Message> {
+    abstract subject: T["subject"];
     private client;
     constructor(client: Stan);
-    publish(data: T['data']): Promise<unknown>;
+    publish(message: T): Promise<unknown>;
 }
-export {};

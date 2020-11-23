@@ -1,4 +1,34 @@
 from enum import Enum
+from typing import Any
+
+
+class Metadata:
+    trace_id: str
+    user_id: str
+
+    def __init__(self, trace_id: str, user_id: str) -> None:
+        self.trace_id = trace_id
+        self.user_id = user_id
+
+
+class Subjects(Enum):
+    ADD_USER = "AddUser"
+    MODIFY_USER = "ModifyUser"
+    USER_ADDED = "UserAdded"
+    USER_MODIFIED = "UserModified"
+
+
+class Message:
+    data: Any
+    id: str
+    metadata: Metadata
+    subject: Subjects
+
+    def __init__(self, data: Any, id: str, metadata: Metadata, subject: Subjects) -> None:
+        self.data = data
+        self.id = id
+        self.metadata = metadata
+        self.subject = subject
 
 
 class Commands(Enum):
@@ -25,15 +55,6 @@ class AddUserCommandData:
         self.last_name = last_name
         self.locale = locale
         self.picture = picture
-
-
-class Metadata:
-    trace_id: str
-    user_id: str
-
-    def __init__(self, trace_id: str, user_id: str) -> None:
-        self.trace_id = trace_id
-        self.user_id = user_id
 
 
 class AddUserCommandSubject(Enum):

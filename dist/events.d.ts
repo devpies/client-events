@@ -1,3 +1,14 @@
+export declare type Subjects = Events | Commands;
+export interface Message {
+    id: string;
+    subject: Subjects;
+    metadata: Metadata;
+    data: any;
+}
+export interface Metadata {
+    traceId: string;
+    userId: string;
+}
 export declare enum Commands {
     AddUser = "AddUser",
     ModifyUser = "ModifyUser"
@@ -32,10 +43,6 @@ export declare enum Events {
     UserAdded = "UserAdded",
     UserModified = "UserModified"
 }
-interface Metadata {
-    traceId: string;
-    userId: string;
-}
 export interface UserAddedEvent {
     id: string;
     subject: Events.UserAdded;
@@ -62,4 +69,3 @@ export interface UserModifiedEvent {
         locale: string;
     };
 }
-export {};

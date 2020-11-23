@@ -1,31 +1,23 @@
-import { Stan } from 'node-nats-streaming';
-import { Events, Commands } from '.';
+import { Stan } from "node-nats-streaming";
+import { Message } from ".";
 
-type Subjects = Events | Commands
+export abstract class Publisher<T extends Message> {
+  abstract subject: T["subject"];
+  private client: Stan;
 
-interface Event {
-    subject: Subjects;
-    data: any;
-}
+  constructor(client: Stan) {
+    this.client = client;
+  }
 
-export abstract class Publisher<T extends Event> {
-    abstract subject: T['subject'];
-    private client: Stan;
-
-    constructor(client: Stan) {
-        this.client = client
-    }
-
-    publish(data: T['data']) {
-        return new Promise((resolve,reject)=> {
-            this.client.publish(this.subject, JSON.stringify(data), (err)=> {
-               if (err) {
-                   return reject(err)
-               }
-               resolve();
-                console.log('Event Published', this.subject)
-            })
-        })
-       
-    }
+  publish(message: T) {
+    return new Promise((resolve, reject) => {
+      this.client.publish(this.subject, JSON.stringify(message), (err) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+        console.log("Message Published", this.subject);
+      });
+    });
+  }
 }

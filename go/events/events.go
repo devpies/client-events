@@ -1,6 +1,15 @@
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse and unparse this JSON data, add this code to your project and do:
 //
+//    subjects, err := UnmarshalSubjects(bytes)
+//    bytes, err = subjects.Marshal()
+//
+//    message, err := UnmarshalMessage(bytes)
+//    bytes, err = message.Marshal()
+//
+//    metadata, err := UnmarshalMetadata(bytes)
+//    bytes, err = metadata.Marshal()
+//
 //    commands, err := UnmarshalCommands(bytes)
 //    bytes, err = commands.Marshal()
 //
@@ -13,9 +22,6 @@
 //    events, err := UnmarshalEvents(bytes)
 //    bytes, err = events.Marshal()
 //
-//    metadata, err := UnmarshalMetadata(bytes)
-//    bytes, err = metadata.Marshal()
-//
 //    userAddedEvent, err := UnmarshalUserAddedEvent(bytes)
 //    bytes, err = userAddedEvent.Marshal()
 //
@@ -25,6 +31,36 @@
 package events
 
 import "encoding/json"
+
+func UnmarshalSubjects(data []byte) (Subjects, error) {
+	var r Subjects
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+func (r *Subjects) Marshal() ([]byte, error) {
+	return json.Marshal(r)
+}
+
+func UnmarshalMessage(data []byte) (Message, error) {
+	var r Message
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+func (r *Message) Marshal() ([]byte, error) {
+	return json.Marshal(r)
+}
+
+func UnmarshalMetadata(data []byte) (Metadata, error) {
+	var r Metadata
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+func (r *Metadata) Marshal() ([]byte, error) {
+	return json.Marshal(r)
+}
 
 func UnmarshalCommands(data []byte) (Commands, error) {
 	var r Commands
@@ -66,16 +102,6 @@ func (r *Events) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
-func UnmarshalMetadata(data []byte) (Metadata, error) {
-	var r Metadata
-	err := json.Unmarshal(data, &r)
-	return r, err
-}
-
-func (r *Metadata) Marshal() ([]byte, error) {
-	return json.Marshal(r)
-}
-
 func UnmarshalUserAddedEvent(data []byte) (UserAddedEvent, error) {
 	var r UserAddedEvent
 	err := json.Unmarshal(data, &r)
@@ -96,6 +122,18 @@ func (r *UserModifiedEvent) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
+type Message struct {
+	Data     interface{} `json:"data"`    
+	ID       string      `json:"id"`      
+	Metadata Metadata    `json:"metadata"`
+	Subject  Subjects    `json:"subject"` 
+}
+
+type Metadata struct {
+	TraceID string `json:"traceId"`
+	UserID  string `json:"userId"` 
+}
+
 type AddUserCommand struct {
 	Data     AddUserCommandData    `json:"data"`    
 	ID       string                `json:"id"`      
@@ -112,11 +150,6 @@ type AddUserCommandData struct {
 	LastName      string `json:"lastName"`     
 	Locale        string `json:"locale"`       
 	Picture       string `json:"picture"`      
-}
-
-type Metadata struct {
-	TraceID string `json:"traceId"`
-	UserID  string `json:"userId"` 
 }
 
 type ModifyUserCommand struct {
@@ -164,6 +197,14 @@ type UserModifiedEventData struct {
 	Locale    string `json:"locale"`   
 	Picture   string `json:"picture"`  
 }
+
+type Subjects string
+const (
+	SubjectsAddUser Subjects = "AddUser"
+	SubjectsModifyUser Subjects = "ModifyUser"
+	SubjectsUserAdded Subjects = "UserAdded"
+	SubjectsUserModified Subjects = "UserModified"
+)
 
 type Commands string
 const (
