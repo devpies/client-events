@@ -29,12 +29,11 @@ func NewClient(clusterId, clientId, url string) *Client {
 }
 
 func (c *Client) Listen(subj, quegrp string, parseMsg func(msg *stan.Msg), opts ...stan.SubscriptionOption) {
-	sub, err := c.Conn.QueueSubscribe(subj, quegrp, parseMsg, opts...)
+	_, err := c.Conn.QueueSubscribe(subj, quegrp, parseMsg, opts...)
 	if err != nil {
 		c.Conn.Close()
 		log.Fatal(err)
 	}
-	sub.Unsubscribe()
 }
 
 
