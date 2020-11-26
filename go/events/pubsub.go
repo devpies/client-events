@@ -8,7 +8,6 @@ import (
 	"time"
 )
 
-// Client
 type Client struct {
 	Conn stan.Conn
 }
@@ -40,7 +39,6 @@ func (c *Client) Publish(sub string, msg []byte) {
 	var glock sync.Mutex
 	var guid string
 
-	// Ack Handler
 	acb := func(lguid string, err error) {
 		glock.Lock()
 		log.Printf("Received ACK for guid %s\n", lguid)
@@ -54,7 +52,6 @@ func (c *Client) Publish(sub string, msg []byte) {
 		ch <- true
 	}
 
-	// Publish message
 	glock.Lock()
 	guid, err := c.Conn.PublishAsync(sub, msg, acb)
 	if err != nil {
