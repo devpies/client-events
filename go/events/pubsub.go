@@ -13,7 +13,7 @@ type Client struct {
 	Conn stan.Conn
 }
 
-func NewClient(clusterId, clientId, url string) *Client {
+func NewClient(clusterId, clientId, url string) (*Client, func () error) {
 	sc, err := stan.Connect(clusterId, clientId, stan.NatsURL(url),
 		stan.SetConnectionLostHandler(func(_ stan.Conn, reason error) {
 			log.Fatalf("Connection failed for some reason: %v", reason)
@@ -21,11 +21,10 @@ func NewClient(clusterId, clientId, url string) *Client {
 	if err != nil {
 		fmt.Printf("error: %v",err)
 	}
-	defer sc.Close()
 
 	return &Client{
 		Conn: sc,
-	}
+	}, sc.Close
 }
 
 func (c *Client) Listen(subj, quegrp string, parseMsg func(msg *stan.Msg), opts ...stan.SubscriptionOption) {
@@ -35,8 +34,6 @@ func (c *Client) Listen(subj, quegrp string, parseMsg func(msg *stan.Msg), opts 
 		log.Fatal(err)
 	}
 }
-
-
 
 func (c *Client) Publish(sub string, msg []byte) {
 	ch := make(chan bool)
