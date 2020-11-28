@@ -60,7 +60,7 @@ Supported languages include:
 
 ### Development
 
-Modify `src/index.ts`, the source of truth, then re-build to update all packages.
+Modify `src/events.ts`, the source of truth, then re-build to update all packages.
 
 ```
 npm run build
