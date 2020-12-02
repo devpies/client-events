@@ -71,24 +71,25 @@ npm run build
 Here's the steps to perform a manual release for Typescript, Python and Go packages (needs to be automated). Publishing Go modules relies on git tags. https://blog.golang.org/publishing-go-modules
 
 ```bash
-# 1. update ./py/setup.py version
-# 2. update ./package.json version
-# 3. commit changes to git
+# 1. npm run build
+# 2. update ./py/setup.py version
+# 3. update ./package.json version
+# 4. commit changes to git
 
-#4. build and upload python package to PYPI
+#5. build and upload python package to PYPI
 cd py
 python3 setup.py sdist bdist_wheel
 python3 -m twine upload --skip-existing dist/*
 
-# 5. create a new tag for release
+# 6. create a new tag for release
 git tag v0.0.1
 
-# 6. push new tag
+# 7. push new tag
 git push origin v0.0.1
 
-# 7. push changes to remote repository
+# 8. push changes to remote repository
 git push origin main
 
-# 8. publish npm module
+# 9. publish npm module
 npm publish
 ```
