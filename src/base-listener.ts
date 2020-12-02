@@ -5,12 +5,17 @@ export abstract class Listener<T extends Message> {
   abstract subject: T["subject"];
   abstract queueGroupName: string;
   abstract onMessage(message: T, msg: MessageUtils): void;
-
+  public streamName: string;
   private client: Stan;
   protected ackWait = 5 * 1000; // 5000 milliseconds
 
-  constructor(client: Stan) {
+  constructor(client: Stan, context: string) {
     this.client = client;
+    this.streamName = this.format(context);
+  }
+
+  format(context: string) {
+    return this.subject + context;
   }
 
   subscriptionOptions() {
@@ -30,7 +35,9 @@ export abstract class Listener<T extends Message> {
     );
 
     subscription.on("message", (msg: MessageUtils) => {
-      console.log(`Message received: ${this.subject} / ${this.queueGroupName}`);
+      console.log(
+        `Message received: ${this.streamName} / ${this.queueGroupName}`
+      );
       const parsedData = this.parseMessage(msg);
       this.onMessage(parsedData, msg);
     });

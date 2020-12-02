@@ -25,6 +25,18 @@ export enum Categories {
   Projects = "projects",
 }
 
+// Entity streams
+// `{Category.Identity}-123`
+
+// Category streams
+// `{Category.Identity}`
+
+// Command streams
+// `{Category.Identity}:command-123`
+
+// Command Category streams
+// `{Category.Identity}:command`
+
 export enum Commands {
   AddUser = "AddUser",
   ModifyUser = "ModifyUser",
