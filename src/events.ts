@@ -19,6 +19,12 @@ export interface Metadata {
   userId: string;
 }
 
+export enum Categories {
+  Identity = "identity",
+  Estimation = "estimation",
+  Projects = "projects",
+}
+
 export enum Commands {
   AddUser = "AddUser",
   ModifyUser = "ModifyUser",
