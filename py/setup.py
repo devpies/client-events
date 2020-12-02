@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="devpie-client-events",
-    version="0.0.24",
+    version="0.0.26",
     author="ivorscott",
     author_email="ivor@devpie.io",
     long_description=long_description,

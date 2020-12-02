@@ -1,7 +1,7 @@
-export declare type Subjects = Events | Commands;
+export declare type EventTypes = Events | Commands;
 export interface Message {
     id: string;
-    subject: Subjects;
+    type: EventTypes;
     metadata: Metadata;
     data: any;
 }
@@ -9,13 +9,18 @@ export interface Metadata {
     traceId: string;
     userId: string;
 }
+export declare enum Categories {
+    Identity = "identity",
+    Estimation = "estimation",
+    Projects = "projects"
+}
 export declare enum Commands {
     AddUser = "AddUser",
     ModifyUser = "ModifyUser"
 }
 export interface AddUserCommand {
     id: string;
-    subject: Commands.AddUser;
+    type: Commands.AddUser;
     metadata: Metadata;
     data: {
         id: string;
@@ -30,7 +35,7 @@ export interface AddUserCommand {
 }
 export interface ModifyUserCommand {
     id: string;
-    subject: Commands.ModifyUser;
+    type: Commands.ModifyUser;
     metadata: Metadata;
     data: {
         firstName: string;
@@ -45,7 +50,7 @@ export declare enum Events {
 }
 export interface UserAddedEvent {
     id: string;
-    subject: Events.UserAdded;
+    type: Events.UserAdded;
     metadata: Metadata;
     data: {
         id: string;
@@ -60,7 +65,7 @@ export interface UserAddedEvent {
 }
 export interface UserModifiedEvent {
     id: string;
-    subject: Events.UserModified;
+    type: Events.UserModified;
     metadata: Metadata;
     data: {
         firstName: string;

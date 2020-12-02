@@ -1,14 +1,17 @@
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse and unparse this JSON data, add this code to your project and do:
 //
-//    subjects, err := UnmarshalSubjects(bytes)
-//    bytes, err = subjects.Marshal()
+//    eventTypes, err := UnmarshalEventTypes(bytes)
+//    bytes, err = eventTypes.Marshal()
 //
 //    message, err := UnmarshalMessage(bytes)
 //    bytes, err = message.Marshal()
 //
 //    metadata, err := UnmarshalMetadata(bytes)
 //    bytes, err = metadata.Marshal()
+//
+//    categories, err := UnmarshalCategories(bytes)
+//    bytes, err = categories.Marshal()
 //
 //    commands, err := UnmarshalCommands(bytes)
 //    bytes, err = commands.Marshal()
@@ -32,13 +35,13 @@ package events
 
 import "encoding/json"
 
-func UnmarshalSubjects(data []byte) (Subjects, error) {
-	var r Subjects
+func UnmarshalEventTypes(data []byte) (EventTypes, error) {
+	var r EventTypes
 	err := json.Unmarshal(data, &r)
 	return r, err
 }
 
-func (r *Subjects) Marshal() ([]byte, error) {
+func (r *EventTypes) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
@@ -59,6 +62,16 @@ func UnmarshalMetadata(data []byte) (Metadata, error) {
 }
 
 func (r *Metadata) Marshal() ([]byte, error) {
+	return json.Marshal(r)
+}
+
+func UnmarshalCategories(data []byte) (Categories, error) {
+	var r Categories
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+func (r *Categories) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
@@ -126,7 +139,7 @@ type Message struct {
 	Data     interface{} `json:"data"`    
 	ID       string      `json:"id"`      
 	Metadata Metadata    `json:"metadata"`
-	Subject  Subjects    `json:"subject"` 
+	Type     EventTypes  `json:"type"`    
 }
 
 type Metadata struct {
@@ -135,10 +148,10 @@ type Metadata struct {
 }
 
 type AddUserCommand struct {
-	Data     AddUserCommandData    `json:"data"`    
-	ID       string                `json:"id"`      
-	Metadata Metadata              `json:"metadata"`
-	Subject  AddUserCommandSubject `json:"subject"` 
+	Data     AddUserCommandData `json:"data"`    
+	ID       string             `json:"id"`      
+	Metadata Metadata           `json:"metadata"`
+	Type     AddUserCommandType `json:"type"`    
 }
 
 type AddUserCommandData struct {
@@ -153,10 +166,10 @@ type AddUserCommandData struct {
 }
 
 type ModifyUserCommand struct {
-	Data     ModifyUserCommandData    `json:"data"`    
-	ID       string                   `json:"id"`      
-	Metadata Metadata                 `json:"metadata"`
-	Subject  ModifyUserCommandSubject `json:"subject"` 
+	Data     ModifyUserCommandData `json:"data"`    
+	ID       string                `json:"id"`      
+	Metadata Metadata              `json:"metadata"`
+	Type     ModifyUserCommandType `json:"type"`    
 }
 
 type ModifyUserCommandData struct {
@@ -167,10 +180,10 @@ type ModifyUserCommandData struct {
 }
 
 type UserAddedEvent struct {
-	Data     UserAddedEventData    `json:"data"`    
-	ID       string                `json:"id"`      
-	Metadata Metadata              `json:"metadata"`
-	Subject  UserAddedEventSubject `json:"subject"` 
+	Data     UserAddedEventData `json:"data"`    
+	ID       string             `json:"id"`      
+	Metadata Metadata           `json:"metadata"`
+	Type     UserAddedEventType `json:"type"`    
 }
 
 type UserAddedEventData struct {
@@ -185,10 +198,10 @@ type UserAddedEventData struct {
 }
 
 type UserModifiedEvent struct {
-	Data     UserModifiedEventData    `json:"data"`    
-	ID       string                   `json:"id"`      
-	Metadata Metadata                 `json:"metadata"`
-	Subject  UserModifiedEventSubject `json:"subject"` 
+	Data     UserModifiedEventData `json:"data"`    
+	ID       string                `json:"id"`      
+	Metadata Metadata              `json:"metadata"`
+	Type     UserModifiedEventType `json:"type"`    
 }
 
 type UserModifiedEventData struct {
@@ -198,12 +211,19 @@ type UserModifiedEventData struct {
 	Picture   string `json:"picture"`  
 }
 
-type Subjects string
+type EventTypes string
 const (
-	SubjectsAddUser Subjects = "AddUser"
-	SubjectsModifyUser Subjects = "ModifyUser"
-	SubjectsUserAdded Subjects = "UserAdded"
-	SubjectsUserModified Subjects = "UserModified"
+	EventTypesAddUser EventTypes = "AddUser"
+	EventTypesModifyUser EventTypes = "ModifyUser"
+	EventTypesUserAdded EventTypes = "UserAdded"
+	EventTypesUserModified EventTypes = "UserModified"
+)
+
+type Categories string
+const (
+	Estimation Categories = "estimation"
+	Identity Categories = "identity"
+	Projects Categories = "projects"
 )
 
 type Commands string
@@ -212,14 +232,14 @@ const (
 	CommandsModifyUser Commands = "ModifyUser"
 )
 
-type AddUserCommandSubject string
+type AddUserCommandType string
 const (
-	SubjectAddUser AddUserCommandSubject = "AddUser"
+	TypeAddUser AddUserCommandType = "AddUser"
 )
 
-type ModifyUserCommandSubject string
+type ModifyUserCommandType string
 const (
-	SubjectModifyUser ModifyUserCommandSubject = "ModifyUser"
+	TypeModifyUser ModifyUserCommandType = "ModifyUser"
 )
 
 type Events string
@@ -228,12 +248,12 @@ const (
 	EventsUserModified Events = "UserModified"
 )
 
-type UserAddedEventSubject string
+type UserAddedEventType string
 const (
-	SubjectUserAdded UserAddedEventSubject = "UserAdded"
+	TypeUserAdded UserAddedEventType = "UserAdded"
 )
 
-type UserModifiedEventSubject string
+type UserModifiedEventType string
 const (
-	SubjectUserModified UserModifiedEventSubject = "UserModified"
+	TypeUserModified UserModifiedEventType = "UserModified"
 )

@@ -2,17 +2,13 @@ import { Stan } from "node-nats-streaming";
 import { Message } from ".";
 
 export abstract class Publisher<T extends Message> {
-  abstract subject: T["subject"];
+  abstract type: T["type"];
   public streamName: string;
   private client: Stan;
 
-  constructor(client: Stan, context: string) {
+  constructor(client: Stan, streamName: string) {
     this.client = client;
-    this.streamName = this.format(context);
-  }
-
-  format(context: string) {
-    return this.subject + context;
+    this.streamName = streamName;
   }
 
   publish(message: T) {
@@ -22,7 +18,7 @@ export abstract class Publisher<T extends Message> {
           return reject(err);
         }
         resolve();
-        console.log("Message Published", this.subject);
+        console.log("Message Published", this.type);
       });
     });
   }

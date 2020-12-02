@@ -2,20 +2,16 @@ import { Stan, Message as MessageUtils } from "node-nats-streaming";
 import { Message } from ".";
 
 export abstract class Listener<T extends Message> {
-  abstract subject: T["subject"];
+  abstract type: T["type"];
   abstract queueGroupName: string;
   abstract onMessage(message: T, msg: MessageUtils): void;
   public streamName: string;
   private client: Stan;
   protected ackWait = 5 * 1000; // 5000 milliseconds
 
-  constructor(client: Stan, context: string) {
+  constructor(client: Stan, streamName: string) {
     this.client = client;
-    this.streamName = this.format(context);
-  }
-
-  format(context: string) {
-    return this.subject + context;
+    this.streamName = streamName;
   }
 
   subscriptionOptions() {
@@ -29,7 +25,7 @@ export abstract class Listener<T extends Message> {
 
   listen() {
     const subscription = this.client.subscribe(
-      this.subject,
+      this.type,
       this.queueGroupName,
       this.subscriptionOptions()
     );

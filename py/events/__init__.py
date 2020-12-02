@@ -11,7 +11,7 @@ class Metadata:
         self.user_id = user_id
 
 
-class Subjects(Enum):
+class EventTypes(Enum):
     ADD_USER = "AddUser"
     MODIFY_USER = "ModifyUser"
     USER_ADDED = "UserAdded"
@@ -22,13 +22,19 @@ class Message:
     data: Any
     id: str
     metadata: Metadata
-    subject: Subjects
+    type: EventTypes
 
-    def __init__(self, data: Any, id: str, metadata: Metadata, subject: Subjects) -> None:
+    def __init__(self, data: Any, id: str, metadata: Metadata, type: EventTypes) -> None:
         self.data = data
         self.id = id
         self.metadata = metadata
-        self.subject = subject
+        self.type = type
+
+
+class Categories(Enum):
+    ESTIMATION = "estimation"
+    IDENTITY = "identity"
+    PROJECTS = "projects"
 
 
 class Commands(Enum):
@@ -57,7 +63,7 @@ class AddUserCommandData:
         self.picture = picture
 
 
-class AddUserCommandSubject(Enum):
+class AddUserCommandType(Enum):
     ADD_USER = "AddUser"
 
 
@@ -65,13 +71,13 @@ class AddUserCommand:
     data: AddUserCommandData
     id: str
     metadata: Metadata
-    subject: AddUserCommandSubject
+    type: AddUserCommandType
 
-    def __init__(self, data: AddUserCommandData, id: str, metadata: Metadata, subject: AddUserCommandSubject) -> None:
+    def __init__(self, data: AddUserCommandData, id: str, metadata: Metadata, type: AddUserCommandType) -> None:
         self.data = data
         self.id = id
         self.metadata = metadata
-        self.subject = subject
+        self.type = type
 
 
 class ModifyUserCommandData:
@@ -87,7 +93,7 @@ class ModifyUserCommandData:
         self.picture = picture
 
 
-class ModifyUserCommandSubject(Enum):
+class ModifyUserCommandType(Enum):
     MODIFY_USER = "ModifyUser"
 
 
@@ -95,13 +101,13 @@ class ModifyUserCommand:
     data: ModifyUserCommandData
     id: str
     metadata: Metadata
-    subject: ModifyUserCommandSubject
+    type: ModifyUserCommandType
 
-    def __init__(self, data: ModifyUserCommandData, id: str, metadata: Metadata, subject: ModifyUserCommandSubject) -> None:
+    def __init__(self, data: ModifyUserCommandData, id: str, metadata: Metadata, type: ModifyUserCommandType) -> None:
         self.data = data
         self.id = id
         self.metadata = metadata
-        self.subject = subject
+        self.type = type
 
 
 class Events(Enum):
@@ -130,7 +136,7 @@ class UserAddedEventData:
         self.picture = picture
 
 
-class UserAddedEventSubject(Enum):
+class UserAddedEventType(Enum):
     USER_ADDED = "UserAdded"
 
 
@@ -138,13 +144,13 @@ class UserAddedEvent:
     data: UserAddedEventData
     id: str
     metadata: Metadata
-    subject: UserAddedEventSubject
+    type: UserAddedEventType
 
-    def __init__(self, data: UserAddedEventData, id: str, metadata: Metadata, subject: UserAddedEventSubject) -> None:
+    def __init__(self, data: UserAddedEventData, id: str, metadata: Metadata, type: UserAddedEventType) -> None:
         self.data = data
         self.id = id
         self.metadata = metadata
-        self.subject = subject
+        self.type = type
 
 
 class UserModifiedEventData:
@@ -160,7 +166,7 @@ class UserModifiedEventData:
         self.picture = picture
 
 
-class UserModifiedEventSubject(Enum):
+class UserModifiedEventType(Enum):
     USER_MODIFIED = "UserModified"
 
 
@@ -168,10 +174,10 @@ class UserModifiedEvent:
     data: UserModifiedEventData
     id: str
     metadata: Metadata
-    subject: UserModifiedEventSubject
+    type: UserModifiedEventType
 
-    def __init__(self, data: UserModifiedEventData, id: str, metadata: Metadata, subject: UserModifiedEventSubject) -> None:
+    def __init__(self, data: UserModifiedEventData, id: str, metadata: Metadata, type: UserModifiedEventType) -> None:
         self.data = data
         self.id = id
         self.metadata = metadata
-        self.subject = subject
+        self.type = type

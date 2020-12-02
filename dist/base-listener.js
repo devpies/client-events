@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Listener = void 0;
 class Listener {
-    constructor(client) {
+    constructor(client, streamName) {
         this.ackWait = 5 * 1000; // 5000 milliseconds
         this.client = client;
+        this.streamName = streamName;
     }
     subscriptionOptions() {
         return this.client
@@ -15,9 +16,9 @@ class Listener {
             .setDurableName(this.queueGroupName);
     }
     listen() {
-        const subscription = this.client.subscribe(this.subject, this.queueGroupName, this.subscriptionOptions());
+        const subscription = this.client.subscribe(this.type, this.queueGroupName, this.subscriptionOptions());
         subscription.on("message", (msg) => {
-            console.log(`Message received: ${this.subject} / ${this.queueGroupName}`);
+            console.log(`Message received: ${this.streamName} / ${this.queueGroupName}`);
             const parsedData = this.parseMessage(msg);
             this.onMessage(parsedData, msg);
         });
