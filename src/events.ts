@@ -26,20 +26,23 @@ export enum Categories {
 }
 
 // Entity streams
-// `{Category.Identity}-123`
+// `{Category.Identity}.123`
 
 // Category streams
 // `{Category.Identity}`
 
 // Command streams
-// `{Category.Identity}:command-123`
+// `{Category.Identity}.command.123`
 
 // Command Category streams
-// `{Category.Identity}:command`
+// `{Category.Identity}.command`
 
 export enum Commands {
   AddUser = "AddUser",
   ModifyUser = "ModifyUser",
+  LockAccount = "LockAccount",
+  UnlockAccount = "UnlockAccount",
+  CloseAccount = "CloseAccount",
   // AddTask = 'AddTask',
   // ModifyTask = 'ModifyTask',
   // DestroyTask = 'DestroyTask',
@@ -83,6 +86,9 @@ export interface ModifyUserCommand {
 export enum Events {
   UserAdded = "UserAdded",
   UserModified = "UserModified",
+  AccountClosed = "AccountClosed",
+  AccountLocked = "AccountLocked",
+  AccountUnlocked = "AccountUnlocked",
   // TaskAdded = 'TaskAdded',
   // TaskModified = 'TaskModified',
   // TaskDestroyed = 'TaskDestroyed',
