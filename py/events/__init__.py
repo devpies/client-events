@@ -13,6 +13,7 @@ class Metadata:
 
 class EventTypes(Enum):
     ADD_USER = "AddUser"
+    ENABLE_ACCOUNTING = "EnableAccounting"
     MODIFY_USER = "ModifyUser"
     USER_ADDED = "UserAdded"
     USER_MODIFIED = "UserModified"
@@ -32,6 +33,7 @@ class Message:
 
 
 class Categories(Enum):
+    ACCOUNTING = "Accounting"
     ESTIMATION = "estimation"
     IDENTITY = "identity"
     PROJECTS = "projects"
@@ -39,6 +41,7 @@ class Categories(Enum):
 
 class Commands(Enum):
     ADD_USER = "AddUser"
+    ENABLE_ACCOUNTING = "EnableAccounting"
     MODIFY_USER = "ModifyUser"
 
 
@@ -104,6 +107,32 @@ class ModifyUserCommand:
     type: ModifyUserCommandType
 
     def __init__(self, data: ModifyUserCommandData, id: str, metadata: Metadata, type: ModifyUserCommandType) -> None:
+        self.data = data
+        self.id = id
+        self.metadata = metadata
+        self.type = type
+
+
+class EnableAccountingCommandData:
+    auth0_id: str
+    token: str
+
+    def __init__(self, auth0_id: str, token: str) -> None:
+        self.auth0_id = auth0_id
+        self.token = token
+
+
+class EnableAccountingCommandType(Enum):
+    ENABLE_ACCOUNTING = "EnableAccounting"
+
+
+class EnableAccountingCommand:
+    data: EnableAccountingCommandData
+    id: str
+    metadata: Metadata
+    type: EnableAccountingCommandType
+
+    def __init__(self, data: EnableAccountingCommandData, id: str, metadata: Metadata, type: EnableAccountingCommandType) -> None:
         self.data = data
         self.id = id
         self.metadata = metadata

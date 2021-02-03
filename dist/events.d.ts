@@ -12,11 +12,13 @@ export interface Metadata {
 export declare enum Categories {
     Identity = "identity",
     Estimation = "estimation",
-    Projects = "projects"
+    Projects = "projects",
+    Accounting = "Accounting"
 }
 export declare enum Commands {
     AddUser = "AddUser",
-    ModifyUser = "ModifyUser"
+    ModifyUser = "ModifyUser",
+    EnableAccounting = "EnableAccounting"
 }
 export interface AddUserCommand {
     id: string;
@@ -42,6 +44,15 @@ export interface ModifyUserCommand {
         lastName: string;
         picture: string;
         locale: string;
+    };
+}
+export interface EnableAccountingCommand {
+    id: string;
+    type: Commands.EnableAccounting;
+    metadata: Metadata;
+    data: {
+        auth0Id: string;
+        token: string;
     };
 }
 export declare enum Events {

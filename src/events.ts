@@ -23,6 +23,7 @@ export enum Categories {
   Identity = "identity",
   Estimation = "estimation",
   Projects = "projects",
+  Accounting = "Accounting",
 }
 
 // Entity streams
@@ -40,9 +41,7 @@ export enum Categories {
 export enum Commands {
   AddUser = "AddUser",
   ModifyUser = "ModifyUser",
-  LockAccount = "LockAccount",
-  UnlockAccount = "UnlockAccount",
-  CloseAccount = "CloseAccount",
+  EnableAccounting = "EnableAccounting",
   // AddTask = 'AddTask',
   // ModifyTask = 'ModifyTask',
   // DestroyTask = 'DestroyTask',
@@ -83,12 +82,19 @@ export interface ModifyUserCommand {
   };
 }
 
+export interface EnableAccountingCommand {
+  id: string;
+  type: Commands.EnableAccounting;
+  metadata: Metadata;
+  data: {
+    auth0Id: string;
+    token: string;
+  };
+}
+
 export enum Events {
   UserAdded = "UserAdded",
   UserModified = "UserModified",
-  AccountClosed = "AccountClosed",
-  AccountLocked = "AccountLocked",
-  AccountUnlocked = "AccountUnlocked",
   // TaskAdded = 'TaskAdded',
   // TaskModified = 'TaskModified',
   // TaskDestroyed = 'TaskDestroyed',

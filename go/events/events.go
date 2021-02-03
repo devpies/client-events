@@ -22,6 +22,9 @@
 //    modifyUserCommand, err := UnmarshalModifyUserCommand(bytes)
 //    bytes, err = modifyUserCommand.Marshal()
 //
+//    enableAccountingCommand, err := UnmarshalEnableAccountingCommand(bytes)
+//    bytes, err = enableAccountingCommand.Marshal()
+//
 //    events, err := UnmarshalEvents(bytes)
 //    bytes, err = events.Marshal()
 //
@@ -105,6 +108,16 @@ func (r *ModifyUserCommand) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
+func UnmarshalEnableAccountingCommand(data []byte) (EnableAccountingCommand, error) {
+	var r EnableAccountingCommand
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+func (r *EnableAccountingCommand) Marshal() ([]byte, error) {
+	return json.Marshal(r)
+}
+
 func UnmarshalEvents(data []byte) (Events, error) {
 	var r Events
 	err := json.Unmarshal(data, &r)
@@ -179,6 +192,18 @@ type ModifyUserCommandData struct {
 	Picture   string `json:"picture"`  
 }
 
+type EnableAccountingCommand struct {
+	Data     EnableAccountingCommandData `json:"data"`    
+	ID       string                      `json:"id"`      
+	Metadata Metadata                    `json:"metadata"`
+	Type     EnableAccountingCommandType `json:"type"`    
+}
+
+type EnableAccountingCommandData struct {
+	Auth0ID string `json:"auth0Id"`
+	Token   string `json:"token"`  
+}
+
 type UserAddedEvent struct {
 	Data     UserAddedEventData `json:"data"`    
 	ID       string             `json:"id"`      
@@ -214,6 +239,7 @@ type UserModifiedEventData struct {
 type EventTypes string
 const (
 	EventTypesAddUser EventTypes = "AddUser"
+	EventTypesEnableAccounting EventTypes = "EnableAccounting"
 	EventTypesModifyUser EventTypes = "ModifyUser"
 	EventTypesUserAdded EventTypes = "UserAdded"
 	EventTypesUserModified EventTypes = "UserModified"
@@ -221,6 +247,7 @@ const (
 
 type Categories string
 const (
+	Accounting Categories = "Accounting"
 	Estimation Categories = "estimation"
 	Identity Categories = "identity"
 	Projects Categories = "projects"
@@ -229,6 +256,7 @@ const (
 type Commands string
 const (
 	CommandsAddUser Commands = "AddUser"
+	CommandsEnableAccounting Commands = "EnableAccounting"
 	CommandsModifyUser Commands = "ModifyUser"
 )
 
@@ -240,6 +268,11 @@ const (
 type ModifyUserCommandType string
 const (
 	TypeModifyUser ModifyUserCommandType = "ModifyUser"
+)
+
+type EnableAccountingCommandType string
+const (
+	TypeEnableAccounting EnableAccountingCommandType = "EnableAccounting"
 )
 
 type Events string

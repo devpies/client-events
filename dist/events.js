@@ -7,19 +7,21 @@ var Categories;
     Categories["Identity"] = "identity";
     Categories["Estimation"] = "estimation";
     Categories["Projects"] = "projects";
+    Categories["Accounting"] = "Accounting";
 })(Categories = exports.Categories || (exports.Categories = {}));
 // Entity streams
-// `{Category.Identity}-123`
+// `{Category.Identity}.123`
 // Category streams
 // `{Category.Identity}`
 // Command streams
-// `{Category.Identity}:command-123`
+// `{Category.Identity}.command.123`
 // Command Category streams
-// `{Category.Identity}:command`
+// `{Category.Identity}.command`
 var Commands;
 (function (Commands) {
     Commands["AddUser"] = "AddUser";
     Commands["ModifyUser"] = "ModifyUser";
+    Commands["EnableAccounting"] = "EnableAccounting";
     // AddTask = 'AddTask',
     // ModifyTask = 'ModifyTask',
     // DestroyTask = 'DestroyTask',
