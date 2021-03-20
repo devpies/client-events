@@ -56,7 +56,6 @@ Supported languages include:
 
 - TypeScript [See package](https://www.npmjs.com/package/@devpie/client-events)
 - Golang [See package](https://github.com/ivorscott/devpie-client-events/tree/main/go)
-- Python [See package](https://pypi.org/project/devpie-client-events/)
 
 ### Development
 
@@ -68,28 +67,18 @@ npm run build
 
 ### Release
 
-Here's the steps to perform a manual release for Typescript, Python and Go packages (needs to be automated). Publishing Go modules relies on git tags. https://blog.golang.org/publishing-go-modules
+Here's the steps to perform a manual release for Typescript and Go packages (needs to be automated). Publishing Go modules relies on git tags. https://blog.golang.org/publishing-go-modules
 
 ```bash
 # 1. npm run build
-# 2. update ./py/setup.py version
-# 3. update ./package.json version
-# 4. commit changes to git
-
-#5. build and upload python package to PYPI
-cd py
-python3 setup.py sdist bdist_wheel
-python3 -m twine upload --skip-existing dist/*
-
-# 6. create a new tag for release
+# 2. update ./package.json version
+# 3. commit changes to git
+# 4. create a new tag for release
 git tag v0.0.1
-
-# 7. push new tag
+# 5. push new tag
 git push origin v0.0.1
-
-# 8. push changes to remote repository
+# 6. push changes to remote repository
 git push origin main
-
-# 9. publish npm module
+# 7. publish npm module
 npm publish
 ```

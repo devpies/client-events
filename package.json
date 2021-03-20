@@ -5,10 +5,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npm run build-ts && npm run build-go && npm run build-py",
+    "build": "npm run build-ts && npm run build-go",
     "build-ts": "tsc",
-    "build-go": "quicktype src/events.ts -o go/events/events.go --package events",
-    "build-py": "quicktype src/events.ts -o py/events/__init__.py --just-types --nice-property-names --python-version 3.6"
+    "build-go": "quicktype src/events.ts -o go/events/events.go --package events"
   },
   "repository": {
     "type": "git",
