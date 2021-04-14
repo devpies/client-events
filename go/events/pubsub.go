@@ -35,7 +35,7 @@ func (c *Client) ListenQ(subj, quegrp string, parseMsg func(msg *stan.Msg), opts
 	}
 }
 
-func (c *Client) Listen(subj, parseMsg func(msg *stan.Msg), opts ...stan.SubscriptionOption) {
+func (c *Client) Listen(subj string, parseMsg func(msg *stan.Msg), opts ...stan.SubscriptionOption) {
 	_, err := c.Conn.Subscribe(subj, parseMsg, opts...)
 	if err != nil {
 		c.Conn.Close()
