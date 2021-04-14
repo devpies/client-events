@@ -2,10 +2,11 @@ package events
 
 import (
 	"fmt"
-	"github.com/nats-io/stan.go"
 	"log"
 	"sync"
 	"time"
+
+	"github.com/nats-io/stan.go"
 )
 
 type Client struct {
@@ -26,8 +27,16 @@ func NewClient(clusterId, clientId, url string) (*Client, func () error) {
 	}, sc.Close
 }
 
-func (c *Client) Listen(subj, quegrp string, parseMsg func(msg *stan.Msg), opts ...stan.SubscriptionOption) {
+func (c *Client) ListenQ(subj, quegrp string, parseMsg func(msg *stan.Msg), opts ...stan.SubscriptionOption) {
 	_, err := c.Conn.QueueSubscribe(subj, quegrp, parseMsg, opts...)
+	if err != nil {
+		c.Conn.Close()
+		log.Fatal(err)
+	}
+}
+
+func (c *Client) Listen(subj, parseMsg func(msg *stan.Msg), opts ...stan.SubscriptionOption) {
+	_, err := c.Conn.Subscribe(subj, parseMsg, opts...)
 	if err != nil {
 		c.Conn.Close()
 		log.Fatal(err)
