@@ -5,7 +5,7 @@ export declare abstract class Listener<T extends Message> {
     abstract queueGroupName: string;
     abstract onMessage(message: T, msg: MessageUtils): void;
     streamName: string;
-    private client;
+    protected client: Stan;
     protected ackWait: number;
     constructor(client: Stan, streamName: string);
     subscriptionOptions(): import("node-nats-streaming").SubscriptionOptions;
