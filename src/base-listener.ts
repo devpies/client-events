@@ -6,7 +6,7 @@ export abstract class Listener<T extends Message> {
   abstract queueGroupName: string;
   abstract onMessage(message: T, msg: MessageUtils): void;
   public streamName: string;
-  private client: Stan;
+  protected client: Stan;
   protected ackWait = 5 * 1000; // 5000 milliseconds
 
   constructor(client: Stan, streamName: string) {
