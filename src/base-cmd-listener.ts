@@ -1,15 +1,23 @@
+import { Pool } from "pg";
 import { Stan, Message as MessageUtils } from "node-nats-streaming";
-import { Message } from ".";
+import { Message, Categories } from "./events";
 
-export abstract class Listener<T extends Message> {
-  abstract type: T["type"];
+export abstract class CommandListener {
+  abstract category: Categories;
   abstract queueGroupName: string;
-  abstract onMessage(message: T, msg: MessageUtils): void;
-  protected client: Stan;
-  protected ackWait = 5 * 1000; // 5000 milliseconds
+  abstract onMessage(message: Message, utils: MessageUtils): void;
 
-  constructor(client: Stan) {
+  protected db: Pool;
+  protected client: Stan;
+  protected ackWait = 5 * 1000; // 5000 ms
+
+  constructor(client: Stan, db: Pool) {
     this.client = client;
+    this.db = db;
+  }
+
+  get cmdStream() {
+    return `${this.category}.command`;
   }
 
   subscriptionOptions() {
@@ -23,13 +31,15 @@ export abstract class Listener<T extends Message> {
 
   listen() {
     const subscription = this.client.subscribe(
-      this.type,
+      this.cmdStream,
       this.queueGroupName,
       this.subscriptionOptions()
     );
 
     subscription.on("message", (msg: MessageUtils) => {
-      console.log(`Message received: ${this.type} / ${this.queueGroupName}`);
+      console.log(
+        `Message received: ${this.cmdStream} / ${this.queueGroupName}`
+      );
       const parsedData = this.parseMessage(msg);
       this.onMessage(parsedData, msg);
     });

@@ -12,7 +12,7 @@ export abstract class Publisher<T extends Message> {
   }
 
   publish(message: T) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       this.client.publish(this.streamName, JSON.stringify(message), (err) => {
         if (err) {
           return reject(err);

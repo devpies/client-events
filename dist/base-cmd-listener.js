@@ -1,10 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Listener = void 0;
-class Listener {
-    constructor(client) {
-        this.ackWait = 5 * 1000; // 5000 milliseconds
+exports.CommandListener = void 0;
+class CommandListener {
+    constructor(client, db) {
+        this.ackWait = 5 * 1000; // 5000 ms
         this.client = client;
+        this.db = db;
+    }
+    get cmdStream() {
+        return `${this.category}.command`;
     }
     subscriptionOptions() {
         return this.client
@@ -15,9 +19,9 @@ class Listener {
             .setDurableName(this.queueGroupName);
     }
     listen() {
-        const subscription = this.client.subscribe(this.type, this.queueGroupName, this.subscriptionOptions());
+        const subscription = this.client.subscribe(this.cmdStream, this.queueGroupName, this.subscriptionOptions());
         subscription.on("message", (msg) => {
-            console.log(`Message received: ${this.type} / ${this.queueGroupName}`);
+            console.log(`Message received: ${this.cmdStream} / ${this.queueGroupName}`);
             const parsedData = this.parseMessage(msg);
             this.onMessage(parsedData, msg);
         });
@@ -29,4 +33,4 @@ class Listener {
             : JSON.parse(data.toString("utf-8")); // parse buffer
     }
 }
-exports.Listener = Listener;
+exports.CommandListener = CommandListener;

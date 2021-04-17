@@ -5,5 +5,5 @@ export declare abstract class Publisher<T extends Message> {
     streamName: string;
     private client;
     constructor(client: Stan, streamName: string);
-    publish(message: T): Promise<unknown>;
+    publish(message: T): Promise<void>;
 }
