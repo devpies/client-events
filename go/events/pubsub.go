@@ -19,7 +19,7 @@ func NewClient(clusterId, clientId, url string) (*Client, func () error) {
 			log.Fatalf("Connection failed for some reason: %v", reason)
 		}))
 	if err != nil {
-		fmt.Printf("error: %v",err)
+		log.Printf("error: %v",err)
 	}
 
 	return &Client{
@@ -27,19 +27,11 @@ func NewClient(clusterId, clientId, url string) (*Client, func () error) {
 	}, sc.Close
 }
 
-func (c *Client) ListenQ(subj, quegrp string, parseMsg func(msg *stan.Msg), opts ...stan.SubscriptionOption) {
-	_, err := c.Conn.QueueSubscribe(subj, quegrp, parseMsg, opts...)
+func (c *Client) Listen(subj, queuegroup string, parseMsg func(msg *stan.Msg), opts ...stan.SubscriptionOption) {
+	_, err := c.Conn.QueueSubscribe(subj, queuegroup, parseMsg, opts...)
 	if err != nil {
 		c.Conn.Close()
-		log.Fatal(err)
-	}
-}
-
-func (c *Client) Listen(subj string, parseMsg func(msg *stan.Msg), opts ...stan.SubscriptionOption) {
-	_, err := c.Conn.Subscribe(subj, parseMsg, opts...)
-	if err != nil {
-		c.Conn.Close()
-		log.Fatal(err)
+		log.Printf("Subscription failed: "err)
 	}
 }
 

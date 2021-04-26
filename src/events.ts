@@ -1,10 +1,3 @@
-// System messages are either commands or events
-
-// Commands are things to be done. (in the future)
-// Events are things that have happened. (in the past)
-
-// All messages have an id, a subject, metadata and data
-
 export type EventTypes = Events | Commands;
 
 export interface Message {
@@ -20,66 +13,14 @@ export interface Metadata {
 }
 
 export enum Categories {
-  Identity = "identity",
-  Estimation = "estimation",
-  Projects = "projects",
+  Users = "Users",
+  Project = "Project",
+  Estimation = "Estimation",
   Accounting = "Accounting",
 }
 
-// Entity streams
-// `{Category.Identity}.123`
-
-// Category streams
-// `{Category.Identity}`
-
-// Command streams
-// `{Category.Identity}.command.123`
-
-// Command Category streams
-// `{Category.Identity}.command`
-
 export enum Commands {
-  AddUser = "AddUser",
-  ModifyUser = "ModifyUser",
   EnableAccounting = "EnableAccounting",
-  // AddTask = 'AddTask',
-  // ModifyTask = 'ModifyTask',
-  // DestroyTask = 'DestroyTask',
-  // MoveTask = 'MoveTask',
-  // AddColumn = 'AddColumn',
-  // ModifyColumn = 'ModifyColumn',
-  // DestroyColumn = 'DestroyColumn',
-  // AddProject = 'AddProject',
-  // ModifyProject = 'ModifyProject',
-  // DestroyProject = 'DestroyProject',
-}
-
-export interface AddUserCommand {
-  id: string;
-  type: Commands.AddUser;
-  metadata: Metadata;
-  data: {
-    id: string;
-    auth0Id: string;
-    email: string;
-    emailVerified: boolean;
-    firstName: string;
-    lastName: string;
-    picture: string;
-    locale: string;
-  };
-}
-
-export interface ModifyUserCommand {
-  id: string;
-  type: Commands.ModifyUser;
-  metadata: Metadata;
-  data: {
-    firstName: string;
-    lastName: string;
-    picture: string;
-    locale: string;
-  };
 }
 
 export interface EnableAccountingCommand {
@@ -93,44 +34,49 @@ export interface EnableAccountingCommand {
 }
 
 export enum Events {
-  UserAdded = "UserAdded",
-  UserModified = "UserModified",
-  // TaskAdded = 'TaskAdded',
-  // TaskModified = 'TaskModified',
-  // TaskDestroyed = 'TaskDestroyed',
-  // TaskMoved = 'TaskMoved',
-  // ColumnAdded = 'ColumnAdded',
-  // ColumnModified= 'ColumnModified',
-  // ColumnDestroyed = 'ColumnDestroyed',
-  // ProjectAdded = 'ProjectAdded',
-  // ProjectModified= 'ProjectModified',
-  // ProjectDestroyed = 'ProjectDestroyed'
+  MembershipAdded = "MembershipAdded",
+  MembershipDropped = "MembershipDropped",
+  ProjectTeamAssigned = "ProjectTeamAssigned",
+  ProjectTeamUnassigned = "ProjectTeamUnassigned",
 }
 
-export interface UserAddedEvent {
+export interface MembershipAddedEvent {
   id: string;
-  type: Events.UserAdded;
+  type: Events.MembershipAdded;
   metadata: Metadata;
   data: {
-    id: string;
-    auth0Id: string;
-    email: string;
-    emailVerified: boolean;
-    firstName: string;
-    lastName: string;
-    picture: string;
-    locale: string;
+    MemberId: string;
+    TeamId: string;
+    UserId: string;
+    Role: string;
+    Created: string;
   };
 }
 
-export interface UserModifiedEvent {
+export interface MembershipDroppedEvent {
   id: string;
-  type: Events.UserModified;
+  type: Events.MembershipDropped;
   metadata: Metadata;
   data: {
-    firstName: string;
-    lastName: string;
-    picture: string;
-    locale: string;
+    MemberId: string;
+  };
+}
+
+export interface ProjectTeamAssignedEvent {
+  id: string;
+  type: Events.ProjectTeamAssigned;
+  metadata: Metadata;
+  data: {
+    ProjectId: string;
+    TeamId: string;
+  };
+}
+
+export interface ProjectTeamUnassignedEvent {
+  id: string;
+  type: Events.ProjectTeamUnassigned;
+  metadata: Metadata;
+  data: {
+    ProjectId: string;
   };
 }

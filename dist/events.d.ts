@@ -10,41 +10,13 @@ export interface Metadata {
     userId: string;
 }
 export declare enum Categories {
-    Identity = "identity",
-    Estimation = "estimation",
-    Projects = "projects",
+    Users = "Users",
+    Project = "Project",
+    Estimation = "Estimation",
     Accounting = "Accounting"
 }
 export declare enum Commands {
-    AddUser = "AddUser",
-    ModifyUser = "ModifyUser",
     EnableAccounting = "EnableAccounting"
-}
-export interface AddUserCommand {
-    id: string;
-    type: Commands.AddUser;
-    metadata: Metadata;
-    data: {
-        id: string;
-        auth0Id: string;
-        email: string;
-        emailVerified: boolean;
-        firstName: string;
-        lastName: string;
-        picture: string;
-        locale: string;
-    };
-}
-export interface ModifyUserCommand {
-    id: string;
-    type: Commands.ModifyUser;
-    metadata: Metadata;
-    data: {
-        firstName: string;
-        lastName: string;
-        picture: string;
-        locale: string;
-    };
 }
 export interface EnableAccountingCommand {
     id: string;
@@ -56,32 +28,45 @@ export interface EnableAccountingCommand {
     };
 }
 export declare enum Events {
-    UserAdded = "UserAdded",
-    UserModified = "UserModified"
+    MembershipAdded = "MembershipAdded",
+    MembershipDropped = "MembershipDropped",
+    ProjectTeamAssigned = "ProjectTeamAssigned",
+    ProjectTeamUnassigned = "ProjectTeamUnassigned"
 }
-export interface UserAddedEvent {
+export interface MembershipAddedEvent {
     id: string;
-    type: Events.UserAdded;
+    type: Events.MembershipAdded;
     metadata: Metadata;
     data: {
-        id: string;
-        auth0Id: string;
-        email: string;
-        emailVerified: boolean;
-        firstName: string;
-        lastName: string;
-        picture: string;
-        locale: string;
+        MemberId: string;
+        TeamId: string;
+        UserId: string;
+        Role: string;
+        Created: string;
     };
 }
-export interface UserModifiedEvent {
+export interface MembershipDroppedEvent {
     id: string;
-    type: Events.UserModified;
+    type: Events.MembershipDropped;
     metadata: Metadata;
     data: {
-        firstName: string;
-        lastName: string;
-        picture: string;
-        locale: string;
+        MemberId: string;
+    };
+}
+export interface ProjectTeamAssignedEvent {
+    id: string;
+    type: Events.ProjectTeamAssigned;
+    metadata: Metadata;
+    data: {
+        ProjectId: string;
+        TeamId: string;
+    };
+}
+export interface ProjectTeamUnassignedEvent {
+    id: string;
+    type: Events.ProjectTeamUnassigned;
+    metadata: Metadata;
+    data: {
+        ProjectId: string;
     };
 }
