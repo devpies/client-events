@@ -1,8 +1,6 @@
 # Common Module for Event-driven Architecture
 
-Designed for Command Query Responsibility Segregation (CQRS) and event sourcing.
-
-![cqrs architecture](cqrs.png)
+Supports commands and events (CQRS).
 
 ## Overview
 
@@ -15,29 +13,26 @@ Devpie Client's event data model is exported as command and event enums, and mes
 ```typescript
 import { Commands, Events } from "@devpie/client-events";
 
-console.log(Commands.AddUser);
-// AddUser
+console.log(Commands.EnableAccounting);
+// EnableAccounting
 
-console.log(Events.UserAdded);
-// UserAdded
+console.log(Events.MembershipAdded);
+// MembershipAdded
 ```
 
 Existing interfaces allow us to type check the message body being sent, ensuring correctness of implementation.
 
 ```typescript
-export interface UserAddedEvent {
+export interface MembershipAddedEvent {
   id: string;
-  subject: Events.UserAdded;
+  type: Events.MembershipAdded;
   metadata: Metadata;
   data: {
-    id: string;
-    auth0Id: string;
-    email: string;
-    emailVerified: boolean;
-    firstName: string;
-    lastName: string;
-    picture: string;
-    locale: string;
+    MemberId: string;
+    TeamId: string;
+    UserId: string;
+    Role: string;
+    Created: string;
   };
 }
 ```
@@ -50,7 +45,7 @@ A message is a generic term for data that could be either a command or an event.
 
 ### Language Support
 
-This package is written in TypeScript but converted to additional language targets. Each supported language has its own package.
+This package is written in TypeScript but converted to language targets. Each supported language has its own package.
 
 Supported languages include:
 
