@@ -49,7 +49,8 @@ export interface MembershipAddedEvent {
     TeamId: string;
     UserId: string;
     Role: string;
-    Created: string;
+    UpdatedAt: string;
+    CreatedAt: string;
   };
 }
 

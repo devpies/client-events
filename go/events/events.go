@@ -180,11 +180,12 @@ type MembershipAddedEvent struct {
 }
 
 type MembershipAddedEventData struct {
-	Created  string `json:"Created"` 
-	MemberID string `json:"MemberId"`
-	Role     string `json:"Role"`    
-	TeamID   string `json:"TeamId"`  
-	UserID   string `json:"UserId"`  
+	CreatedAt string `json:"CreatedAt"`
+	MemberID  string `json:"MemberId"` 
+	Role      string `json:"Role"`     
+	TeamID    string `json:"TeamId"`   
+	UpdatedAt string `json:"UpdatedAt"`
+	UserID    string `json:"UserId"`   
 }
 
 type MembershipDroppedEvent struct {
