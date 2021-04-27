@@ -1,7 +1,6 @@
 package events
 
 import (
-	"fmt"
 	"log"
 	"sync"
 	"time"
@@ -31,7 +30,7 @@ func (c *Client) Listen(subj, queuegroup string, parseMsg func(msg *stan.Msg), o
 	_, err := c.Conn.QueueSubscribe(subj, queuegroup, parseMsg, opts...)
 	if err != nil {
 		c.Conn.Close()
-		log.Printf("Subscription failed: "err)
+		log.Printf("Subscription failed: %v",err)
 	}
 }
 
