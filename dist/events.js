@@ -14,8 +14,10 @@ var Commands;
 })(Commands = exports.Commands || (exports.Commands = {}));
 var Events;
 (function (Events) {
-    Events["MembershipAdded"] = "MembershipAdded";
-    Events["MembershipDropped"] = "MembershipDropped";
-    Events["ProjectTeamAssigned"] = "ProjectTeamAssigned";
-    Events["ProjectTeamUnassigned"] = "ProjectTeamUnassigned";
+    Events["MembershipCreated"] = "MembershipCreated";
+    Events["MembershipUpdated"] = "MembershipDeleted";
+    Events["MembershipDeleted"] = "MembershipDeleted";
+    Events["ProjectCreated"] = "ProjectCreated";
+    Events["ProjectUpdated"] = "ProjectUpdated";
+    Events["ProjectDeleted"] = "ProjectDeleted";
 })(Events = exports.Events || (exports.Events = {}));

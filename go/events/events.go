@@ -22,17 +22,23 @@
 //    events, err := UnmarshalEvents(bytes)
 //    bytes, err = events.Marshal()
 //
-//    membershipAddedEvent, err := UnmarshalMembershipAddedEvent(bytes)
-//    bytes, err = membershipAddedEvent.Marshal()
+//    membershipCreatedEvent, err := UnmarshalMembershipCreatedEvent(bytes)
+//    bytes, err = membershipCreatedEvent.Marshal()
 //
-//    membershipDroppedEvent, err := UnmarshalMembershipDroppedEvent(bytes)
-//    bytes, err = membershipDroppedEvent.Marshal()
+//    membershipUpdatedEvent, err := UnmarshalMembershipUpdatedEvent(bytes)
+//    bytes, err = membershipUpdatedEvent.Marshal()
 //
-//    projectTeamAssignedEvent, err := UnmarshalProjectTeamAssignedEvent(bytes)
-//    bytes, err = projectTeamAssignedEvent.Marshal()
+//    membershipDeletedEvent, err := UnmarshalMembershipDeletedEvent(bytes)
+//    bytes, err = membershipDeletedEvent.Marshal()
 //
-//    projectTeamUnassignedEvent, err := UnmarshalProjectTeamUnassignedEvent(bytes)
-//    bytes, err = projectTeamUnassignedEvent.Marshal()
+//    projectCreatedEvent, err := UnmarshalProjectCreatedEvent(bytes)
+//    bytes, err = projectCreatedEvent.Marshal()
+//
+//    projectUpdatedEvent, err := UnmarshalProjectUpdatedEvent(bytes)
+//    bytes, err = projectUpdatedEvent.Marshal()
+//
+//    projectDeletedEvent, err := UnmarshalProjectDeletedEvent(bytes)
+//    bytes, err = projectDeletedEvent.Marshal()
 
 package events
 
@@ -108,43 +114,63 @@ func (r *Events) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
-func UnmarshalMembershipAddedEvent(data []byte) (MembershipAddedEvent, error) {
-	var r MembershipAddedEvent
+func UnmarshalMembershipCreatedEvent(data []byte) (MembershipCreatedEvent, error) {
+	var r MembershipCreatedEvent
 	err := json.Unmarshal(data, &r)
 	return r, err
 }
 
-func (r *MembershipAddedEvent) Marshal() ([]byte, error) {
+func (r *MembershipCreatedEvent) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
-func UnmarshalMembershipDroppedEvent(data []byte) (MembershipDroppedEvent, error) {
-	var r MembershipDroppedEvent
+func UnmarshalMembershipUpdatedEvent(data []byte) (MembershipUpdatedEvent, error) {
+	var r MembershipUpdatedEvent
 	err := json.Unmarshal(data, &r)
 	return r, err
 }
 
-func (r *MembershipDroppedEvent) Marshal() ([]byte, error) {
+func (r *MembershipUpdatedEvent) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
-func UnmarshalProjectTeamAssignedEvent(data []byte) (ProjectTeamAssignedEvent, error) {
-	var r ProjectTeamAssignedEvent
+func UnmarshalMembershipDeletedEvent(data []byte) (MembershipDeletedEvent, error) {
+	var r MembershipDeletedEvent
 	err := json.Unmarshal(data, &r)
 	return r, err
 }
 
-func (r *ProjectTeamAssignedEvent) Marshal() ([]byte, error) {
+func (r *MembershipDeletedEvent) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
-func UnmarshalProjectTeamUnassignedEvent(data []byte) (ProjectTeamUnassignedEvent, error) {
-	var r ProjectTeamUnassignedEvent
+func UnmarshalProjectCreatedEvent(data []byte) (ProjectCreatedEvent, error) {
+	var r ProjectCreatedEvent
 	err := json.Unmarshal(data, &r)
 	return r, err
 }
 
-func (r *ProjectTeamUnassignedEvent) Marshal() ([]byte, error) {
+func (r *ProjectCreatedEvent) Marshal() ([]byte, error) {
+	return json.Marshal(r)
+}
+
+func UnmarshalProjectUpdatedEvent(data []byte) (ProjectUpdatedEvent, error) {
+	var r ProjectUpdatedEvent
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+func (r *ProjectUpdatedEvent) Marshal() ([]byte, error) {
+	return json.Marshal(r)
+}
+
+func UnmarshalProjectDeletedEvent(data []byte) (ProjectDeletedEvent, error) {
+	var r ProjectDeletedEvent
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+func (r *ProjectDeletedEvent) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
@@ -172,63 +198,99 @@ type EnableAccountingCommandData struct {
 	Token   string `json:"token"`  
 }
 
-type MembershipAddedEvent struct {
-	Data     MembershipAddedEventData `json:"data"`    
-	ID       string                   `json:"id"`      
-	Metadata Metadata                 `json:"metadata"`
-	Type     MembershipAddedEventType `json:"type"`    
-}
-
-type MembershipAddedEventData struct {
-	CreatedAt string `json:"CreatedAt"`
-	MemberID  string `json:"MemberId"` 
-	Role      string `json:"Role"`     
-	TeamID    string `json:"TeamId"`   
-	UpdatedAt string `json:"UpdatedAt"`
-	UserID    string `json:"UserId"`   
-}
-
-type MembershipDroppedEvent struct {
-	Data     MembershipDroppedEventData `json:"data"`    
+type MembershipCreatedEvent struct {
+	Data     MembershipCreatedEventData `json:"data"`    
 	ID       string                     `json:"id"`      
 	Metadata Metadata                   `json:"metadata"`
-	Type     MembershipDroppedEventType `json:"type"`    
+	Type     MembershipCreatedEventType `json:"type"`    
 }
 
-type MembershipDroppedEventData struct {
-	MemberID string `json:"MemberId"`
+type MembershipCreatedEventData struct {
+	CreatedAt    string `json:"createdAt"`   
+	MembershipID string `json:"membershipId"`
+	Role         string `json:"role"`        
+	TeamID       string `json:"teamId"`      
+	UpdatedAt    string `json:"updatedAt"`   
+	UserID       string `json:"userId"`      
 }
 
-type ProjectTeamAssignedEvent struct {
-	Data     ProjectTeamAssignedEventData `json:"data"`    
-	ID       string                       `json:"id"`      
-	Metadata Metadata                     `json:"metadata"`
-	Type     ProjectTeamAssignedEventType `json:"type"`    
+type MembershipUpdatedEvent struct {
+	Data     MembershipUpdatedEventData `json:"data"`    
+	ID       string                     `json:"id"`      
+	Metadata Metadata                   `json:"metadata"`
+	Type     MembershipUpdatedEventType `json:"type"`    
 }
 
-type ProjectTeamAssignedEventData struct {
-	ProjectID string `json:"ProjectId"`
-	TeamID    string `json:"TeamId"`   
+type MembershipUpdatedEventData struct {
+	Role      string `json:"role"`     
+	UpdatedAt string `json:"updatedAt"`
 }
 
-type ProjectTeamUnassignedEvent struct {
-	Data     ProjectTeamUnassignedEventData `json:"data"`    
-	ID       string                         `json:"id"`      
-	Metadata Metadata                       `json:"metadata"`
-	Type     ProjectTeamUnassignedEventType `json:"type"`    
+type MembershipDeletedEvent struct {
+	Data     MembershipDeletedEventData `json:"data"`    
+	ID       string                     `json:"id"`      
+	Metadata Metadata                   `json:"metadata"`
+	Type     MembershipUpdatedEventType `json:"type"`    
 }
 
-type ProjectTeamUnassignedEventData struct {
-	ProjectID string `json:"ProjectId"`
+type MembershipDeletedEventData struct {
+	MembershipID string `json:"membershipId"`
+}
+
+type ProjectCreatedEvent struct {
+	Data     ProjectCreatedEventData `json:"data"`    
+	ID       string                  `json:"id"`      
+	Metadata Metadata                `json:"metadata"`
+	Type     ProjectCreatedEventType `json:"type"`    
+}
+
+type ProjectCreatedEventData struct {
+	Active      bool     `json:"active"`     
+	ColumnOrder []string `json:"columnOrder"`
+	CreatedAt   string   `json:"createdAt"`  
+	Name        string   `json:"name"`       
+	ProjectID   string   `json:"projectId"`  
+	Public      bool     `json:"public"`     
+	TeamID      string   `json:"teamId"`     
+	UpdatedAt   string   `json:"updatedAt"`  
+	UserID      string   `json:"userId"`     
+}
+
+type ProjectUpdatedEvent struct {
+	Data     ProjectUpdatedEventData `json:"data"`    
+	ID       string                  `json:"id"`      
+	Metadata Metadata                `json:"metadata"`
+	Type     ProjectUpdatedEventType `json:"type"`    
+}
+
+type ProjectUpdatedEventData struct {
+	Active      *bool    `json:"active,omitempty"`     
+	ColumnOrder []string `json:"columnOrder,omitempty"`
+	Name        *string  `json:"name,omitempty"`       
+	Public      *bool    `json:"public,omitempty"`     
+	TeamID      *string  `json:"teamId,omitempty"`     
+	UpdatedAt   string   `json:"updatedAt"`            
+}
+
+type ProjectDeletedEvent struct {
+	Data     ProjectDeletedEventData `json:"data"`    
+	ID       string                  `json:"id"`      
+	Metadata Metadata                `json:"metadata"`
+	Type     ProjectDeletedEventType `json:"type"`    
+}
+
+type ProjectDeletedEventData struct {
+	ProjectID string `json:"projectId"`
 }
 
 type EventTypes string
 const (
 	EventTypesEnableAccounting EventTypes = "EnableAccounting"
-	EventTypesMembershipAdded EventTypes = "MembershipAdded"
-	EventTypesMembershipDropped EventTypes = "MembershipDropped"
-	EventTypesProjectTeamAssigned EventTypes = "ProjectTeamAssigned"
-	EventTypesProjectTeamUnassigned EventTypes = "ProjectTeamUnassigned"
+	EventTypesMembershipCreated EventTypes = "MembershipCreated"
+	EventTypesMembershipDeleted EventTypes = "MembershipDeleted"
+	EventTypesProjectCreated EventTypes = "ProjectCreated"
+	EventTypesProjectDeleted EventTypes = "ProjectDeleted"
+	EventTypesProjectUpdated EventTypes = "ProjectUpdated"
 )
 
 type Categories string
@@ -246,28 +308,34 @@ const (
 
 type Events string
 const (
-	EventsMembershipAdded Events = "MembershipAdded"
-	EventsMembershipDropped Events = "MembershipDropped"
-	EventsProjectTeamAssigned Events = "ProjectTeamAssigned"
-	EventsProjectTeamUnassigned Events = "ProjectTeamUnassigned"
+	EventsMembershipCreated Events = "MembershipCreated"
+	EventsMembershipDeleted Events = "MembershipDeleted"
+	EventsProjectCreated Events = "ProjectCreated"
+	EventsProjectDeleted Events = "ProjectDeleted"
+	EventsProjectUpdated Events = "ProjectUpdated"
 )
 
-type MembershipAddedEventType string
+type MembershipCreatedEventType string
 const (
-	TypeMembershipAdded MembershipAddedEventType = "MembershipAdded"
+	TypeMembershipCreated MembershipCreatedEventType = "MembershipCreated"
 )
 
-type MembershipDroppedEventType string
+type MembershipUpdatedEventType string
 const (
-	TypeMembershipDropped MembershipDroppedEventType = "MembershipDropped"
+	TypeMembershipDeleted MembershipUpdatedEventType = "MembershipDeleted"
 )
 
-type ProjectTeamAssignedEventType string
+type ProjectCreatedEventType string
 const (
-	TypeProjectTeamAssigned ProjectTeamAssignedEventType = "ProjectTeamAssigned"
+	TypeProjectCreated ProjectCreatedEventType = "ProjectCreated"
 )
 
-type ProjectTeamUnassignedEventType string
+type ProjectUpdatedEventType string
 const (
-	TypeProjectTeamUnassigned ProjectTeamUnassignedEventType = "ProjectTeamUnassigned"
+	TypeProjectUpdated ProjectUpdatedEventType = "ProjectUpdated"
+)
+
+type ProjectDeletedEventType string
+const (
+	TypeProjectDeleted ProjectDeletedEventType = "ProjectDeleted"
 )

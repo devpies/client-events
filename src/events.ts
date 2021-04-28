@@ -34,50 +34,83 @@ export interface EnableAccountingCommand {
 }
 
 export enum Events {
-  MembershipAdded = "MembershipAdded",
-  MembershipDropped = "MembershipDropped",
-  ProjectTeamAssigned = "ProjectTeamAssigned",
-  ProjectTeamUnassigned = "ProjectTeamUnassigned",
+  MembershipCreated = "MembershipCreated",
+  MembershipUpdated = "MembershipDeleted",
+  MembershipDeleted = "MembershipDeleted",
+  ProjectCreated = "ProjectCreated",
+  ProjectUpdated = "ProjectUpdated",
+  ProjectDeleted = "ProjectDeleted",
 }
 
-export interface MembershipAddedEvent {
+export interface MembershipCreatedEvent {
   id: string;
-  type: Events.MembershipAdded;
+  type: Events.MembershipCreated;
   metadata: Metadata;
   data: {
-    MemberId: string;
-    TeamId: string;
-    UserId: string;
-    Role: string;
-    UpdatedAt: string;
-    CreatedAt: string;
+    membershipId: string;
+    teamId: string;
+    userId: string;
+    role: string;
+    updatedAt: string;
+    createdAt: string;
   };
 }
 
-export interface MembershipDroppedEvent {
+export interface MembershipUpdatedEvent {
   id: string;
-  type: Events.MembershipDropped;
+  type: Events.MembershipUpdated;
   metadata: Metadata;
   data: {
-    MemberId: string;
+    role: string;
+    updatedAt: string;
   };
 }
 
-export interface ProjectTeamAssignedEvent {
+export interface MembershipDeletedEvent {
   id: string;
-  type: Events.ProjectTeamAssigned;
+  type: Events.MembershipDeleted;
   metadata: Metadata;
   data: {
-    ProjectId: string;
-    TeamId: string;
+    membershipId: string;
   };
 }
 
-export interface ProjectTeamUnassignedEvent {
+export interface ProjectCreatedEvent {
   id: string;
-  type: Events.ProjectTeamUnassigned;
+  type: Events.ProjectCreated;
   metadata: Metadata;
   data: {
-    ProjectId: string;
+    projectId: string;
+    name: string;
+    userId: string;
+    teamId: string;
+    active: boolean;
+    public: boolean;
+    columnOrder: string[];
+    updatedAt: string;
+    createdAt: string;
+  };
+}
+
+export interface ProjectUpdatedEvent {
+  id: string;
+  type: Events.ProjectUpdated;
+  metadata: Metadata;
+  data: {
+    name?: string;
+    teamId?: string;
+    active?: boolean;
+    public?: boolean;
+    columnOrder?: string[];
+    updatedAt: string;
+  };
+}
+
+export interface ProjectDeletedEvent {
+  id: string;
+  type: Events.ProjectDeleted;
+  metadata: Metadata;
+  data: {
+    projectId: string;
   };
 }
