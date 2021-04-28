@@ -29,7 +29,7 @@ export interface EnableAccountingCommand {
 }
 export declare enum Events {
     MembershipCreated = "MembershipCreated",
-    MembershipUpdated = "MembershipDeleted",
+    MembershipUpdated = "MembershipUpdated",
     MembershipDeleted = "MembershipDeleted",
     ProjectCreated = "ProjectCreated",
     ProjectUpdated = "ProjectUpdated",
@@ -53,6 +53,7 @@ export interface MembershipUpdatedEvent {
     type: Events.MembershipUpdated;
     metadata: Metadata;
     data: {
+        membershipId: string;
         role: string;
         updatedAt: string;
     };
@@ -86,6 +87,7 @@ export interface ProjectUpdatedEvent {
     type: Events.ProjectUpdated;
     metadata: Metadata;
     data: {
+        projectId: string;
         name?: string;
         teamId?: string;
         active?: boolean;

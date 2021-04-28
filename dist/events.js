@@ -15,7 +15,7 @@ var Commands;
 var Events;
 (function (Events) {
     Events["MembershipCreated"] = "MembershipCreated";
-    Events["MembershipUpdated"] = "MembershipDeleted";
+    Events["MembershipUpdated"] = "MembershipUpdated";
     Events["MembershipDeleted"] = "MembershipDeleted";
     Events["ProjectCreated"] = "ProjectCreated";
     Events["ProjectUpdated"] = "ProjectUpdated";

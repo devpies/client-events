@@ -222,15 +222,16 @@ type MembershipUpdatedEvent struct {
 }
 
 type MembershipUpdatedEventData struct {
-	Role      string `json:"role"`     
-	UpdatedAt string `json:"updatedAt"`
+	MembershipID string `json:"membershipId"`
+	Role         string `json:"role"`        
+	UpdatedAt    string `json:"updatedAt"`   
 }
 
 type MembershipDeletedEvent struct {
 	Data     MembershipDeletedEventData `json:"data"`    
 	ID       string                     `json:"id"`      
 	Metadata Metadata                   `json:"metadata"`
-	Type     MembershipUpdatedEventType `json:"type"`    
+	Type     MembershipDeletedEventType `json:"type"`    
 }
 
 type MembershipDeletedEventData struct {
@@ -267,6 +268,7 @@ type ProjectUpdatedEventData struct {
 	Active      *bool    `json:"active,omitempty"`     
 	ColumnOrder []string `json:"columnOrder,omitempty"`
 	Name        *string  `json:"name,omitempty"`       
+	ProjectID   string   `json:"projectId"`            
 	Public      *bool    `json:"public,omitempty"`     
 	TeamID      *string  `json:"teamId,omitempty"`     
 	UpdatedAt   string   `json:"updatedAt"`            
@@ -288,6 +290,7 @@ const (
 	EventTypesEnableAccounting EventTypes = "EnableAccounting"
 	EventTypesMembershipCreated EventTypes = "MembershipCreated"
 	EventTypesMembershipDeleted EventTypes = "MembershipDeleted"
+	EventTypesMembershipUpdated EventTypes = "MembershipUpdated"
 	EventTypesProjectCreated EventTypes = "ProjectCreated"
 	EventTypesProjectDeleted EventTypes = "ProjectDeleted"
 	EventTypesProjectUpdated EventTypes = "ProjectUpdated"
@@ -310,6 +313,7 @@ type Events string
 const (
 	EventsMembershipCreated Events = "MembershipCreated"
 	EventsMembershipDeleted Events = "MembershipDeleted"
+	EventsMembershipUpdated Events = "MembershipUpdated"
 	EventsProjectCreated Events = "ProjectCreated"
 	EventsProjectDeleted Events = "ProjectDeleted"
 	EventsProjectUpdated Events = "ProjectUpdated"
@@ -322,7 +326,12 @@ const (
 
 type MembershipUpdatedEventType string
 const (
-	TypeMembershipDeleted MembershipUpdatedEventType = "MembershipDeleted"
+	TypeMembershipUpdated MembershipUpdatedEventType = "MembershipUpdated"
+)
+
+type MembershipDeletedEventType string
+const (
+	TypeMembershipDeleted MembershipDeletedEventType = "MembershipDeleted"
 )
 
 type ProjectCreatedEventType string
