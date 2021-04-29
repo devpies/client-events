@@ -70,3 +70,8 @@ func (c *Client) Publish(sub string, msg []byte) {
 		log.Fatal("timeout")
 	}
 }
+
+func ParseTime(ts string) (time.Time, error) {
+	t, err := time.Parse("2006-01-02 15:04:05.999999999 -0700 MST", ts)
+	return t, err
+}
