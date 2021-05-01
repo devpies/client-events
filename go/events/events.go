@@ -231,7 +231,7 @@ type MembershipCreatedForProjectEvent struct {
 	Data     MembershipCreatedForProjectEventData `json:"data"`    
 	ID       string                               `json:"id"`      
 	Metadata Metadata                             `json:"metadata"`
-	Type     MembershipCreatedEventType           `json:"type"`    
+	Type     MembershipCreatedForProjectEventType `json:"type"`    
 }
 
 type MembershipCreatedForProjectEventData struct {
@@ -354,6 +354,11 @@ const (
 type MembershipCreatedEventType string
 const (
 	TypeMembershipCreated MembershipCreatedEventType = "MembershipCreated"
+)
+
+type MembershipCreatedForProjectEventType string
+const (
+	TypeMembershipCreatedForProject MembershipCreatedForProjectEventType = "MembershipCreatedForProject"
 )
 
 type MembershipUpdatedEventType string

@@ -59,7 +59,7 @@ export interface MembershipCreatedEvent {
 
 export interface MembershipCreatedForProjectEvent {
   id: string;
-  type: Events.MembershipCreated;
+  type: Events.MembershipCreatedForProject;
   metadata: Metadata;
   data: {
     projectId: string;
