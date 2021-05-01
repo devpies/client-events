@@ -25,6 +25,9 @@
 //    membershipCreatedEvent, err := UnmarshalMembershipCreatedEvent(bytes)
 //    bytes, err = membershipCreatedEvent.Marshal()
 //
+//    membershipCreatedForProjectEvent, err := UnmarshalMembershipCreatedForProjectEvent(bytes)
+//    bytes, err = membershipCreatedForProjectEvent.Marshal()
+//
 //    membershipUpdatedEvent, err := UnmarshalMembershipUpdatedEvent(bytes)
 //    bytes, err = membershipUpdatedEvent.Marshal()
 //
@@ -124,6 +127,16 @@ func (r *MembershipCreatedEvent) Marshal() ([]byte, error) {
 	return json.Marshal(r)
 }
 
+func UnmarshalMembershipCreatedForProjectEvent(data []byte) (MembershipCreatedForProjectEvent, error) {
+	var r MembershipCreatedForProjectEvent
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+func (r *MembershipCreatedForProjectEvent) Marshal() ([]byte, error) {
+	return json.Marshal(r)
+}
+
 func UnmarshalMembershipUpdatedEvent(data []byte) (MembershipUpdatedEvent, error) {
 	var r MembershipUpdatedEvent
 	err := json.Unmarshal(data, &r)
@@ -214,6 +227,23 @@ type MembershipCreatedEventData struct {
 	UserID       string `json:"userId"`      
 }
 
+type MembershipCreatedForProjectEvent struct {
+	Data     MembershipCreatedForProjectEventData `json:"data"`    
+	ID       string                               `json:"id"`      
+	Metadata Metadata                             `json:"metadata"`
+	Type     MembershipCreatedEventType           `json:"type"`    
+}
+
+type MembershipCreatedForProjectEventData struct {
+	CreatedAt    string `json:"createdAt"`   
+	MembershipID string `json:"membershipId"`
+	ProjectID    string `json:"projectId"`   
+	Role         string `json:"role"`        
+	TeamID       string `json:"teamId"`      
+	UpdatedAt    string `json:"updatedAt"`   
+	UserID       string `json:"userId"`      
+}
+
 type MembershipUpdatedEvent struct {
 	Data     MembershipUpdatedEventData `json:"data"`    
 	ID       string                     `json:"id"`      
@@ -289,6 +319,7 @@ type EventTypes string
 const (
 	EventTypesEnableAccounting EventTypes = "EnableAccounting"
 	EventTypesMembershipCreated EventTypes = "MembershipCreated"
+	EventTypesMembershipCreatedForProject EventTypes = "MembershipCreatedForProject"
 	EventTypesMembershipDeleted EventTypes = "MembershipDeleted"
 	EventTypesMembershipUpdated EventTypes = "MembershipUpdated"
 	EventTypesProjectCreated EventTypes = "ProjectCreated"
@@ -312,6 +343,7 @@ const (
 type Events string
 const (
 	EventsMembershipCreated Events = "MembershipCreated"
+	EventsMembershipCreatedForProject Events = "MembershipCreatedForProject"
 	EventsMembershipDeleted Events = "MembershipDeleted"
 	EventsMembershipUpdated Events = "MembershipUpdated"
 	EventsProjectCreated Events = "ProjectCreated"

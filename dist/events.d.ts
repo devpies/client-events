@@ -29,6 +29,7 @@ export interface EnableAccountingCommand {
 }
 export declare enum Events {
     MembershipCreated = "MembershipCreated",
+    MembershipCreatedForProject = "MembershipCreatedForProject",
     MembershipUpdated = "MembershipUpdated",
     MembershipDeleted = "MembershipDeleted",
     ProjectCreated = "ProjectCreated",
@@ -40,6 +41,20 @@ export interface MembershipCreatedEvent {
     type: Events.MembershipCreated;
     metadata: Metadata;
     data: {
+        membershipId: string;
+        teamId: string;
+        userId: string;
+        role: string;
+        updatedAt: string;
+        createdAt: string;
+    };
+}
+export interface MembershipCreatedForProjectEvent {
+    id: string;
+    type: Events.MembershipCreated;
+    metadata: Metadata;
+    data: {
+        projectId: string;
         membershipId: string;
         teamId: string;
         userId: string;
