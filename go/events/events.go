@@ -279,7 +279,9 @@ type ProjectCreatedEventData struct {
 	Active      bool     `json:"active"`     
 	ColumnOrder []string `json:"columnOrder"`
 	CreatedAt   string   `json:"createdAt"`  
+	Description string   `json:"description"`
 	Name        string   `json:"name"`       
+	Prefix      string   `json:"prefix"`     
 	ProjectID   string   `json:"projectId"`  
 	Public      bool     `json:"public"`     
 	TeamID      string   `json:"teamId"`     
@@ -297,6 +299,7 @@ type ProjectUpdatedEvent struct {
 type ProjectUpdatedEventData struct {
 	Active      *bool    `json:"active,omitempty"`     
 	ColumnOrder []string `json:"columnOrder,omitempty"`
+	Description *string  `json:"description,omitempty"`
 	Name        *string  `json:"name,omitempty"`       
 	ProjectID   string   `json:"projectId"`            
 	Public      *bool    `json:"public,omitempty"`     

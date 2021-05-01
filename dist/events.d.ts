@@ -88,6 +88,8 @@ export interface ProjectCreatedEvent {
     data: {
         projectId: string;
         name: string;
+        prefix: string;
+        description: string;
         userId: string;
         teamId: string;
         active: boolean;
@@ -104,6 +106,7 @@ export interface ProjectUpdatedEvent {
     data: {
         projectId: string;
         name?: string;
+        description?: string;
         teamId?: string;
         active?: boolean;
         public?: boolean;
