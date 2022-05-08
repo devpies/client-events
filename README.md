@@ -8,7 +8,7 @@ This package serves as a shared library for all message interfaces, commands and
 
 ## How it works
 
-Devpie Client's event data model is exported as command and event enums, and message interfaces, to enable easy lookup of the available identifiers in the system.
+Client's event data model is exported as command and event enums, and message interfaces, to enable easy lookup of the available identifiers in the system.
 
 ```typescript
 import { Commands, Events } from "@devpie/client-events";
@@ -50,7 +50,7 @@ This package is written in TypeScript but converted to language targets. Each su
 Supported languages include:
 
 - TypeScript [See package](https://www.npmjs.com/package/@devpie/client-events)
-- Golang [See package](https://github.com/ivorscott/devpie-client-events/tree/main/go)
+- Golang [See package](https://github.com/ivorscott/client-events/tree/main/go)
 
 ### Development
 
